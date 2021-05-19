@@ -55,7 +55,7 @@ roberto/
     │   ├── blog.scss
     │   ├── breadcrumb.scss
     │   ├── buttons.scss
-    │   ├── contact.scss
+    │   ├── contato.scss
     │   ├── cta.scss
     │   ├── footer.scss
     │   ├── header.scss
@@ -71,7 +71,7 @@ roberto/
     │   ├── style.scss
     ├── about.html
     ├── blog.html
-    ├── contact.html
+    ├── contato.html
     ├── index.html
     ├── room.html
     ├── single-blog.html

@@ -1,18 +1,5 @@
 /* ------------------------------------------
-[Master Stylesheet]
-
-Template Name: Roberto - Hotel & Resort HTML Template
-Template Author: Colorlib
-Template Author URL: http://colorlib.com
-Version: 1.0.0
-Last Update: Feb 9, 2019
----------------------------------------------
-
----------------------------------------------
-[Tables of CSS Content]
-
 + body
-
 - 01.0 Reboot Area CSS
 - 02.0 Spacing Area CSS
 - 03.0 Preloader Area CSS
@@ -28,7 +15,7 @@ Last Update: Feb 9, 2019
 - 13.0 Testimonial Area CSS
 - 14.0 Room Area CSS
 - 15.0 About Area CSS
-- 16.0 Contact Area CSS
+- 16.0 contato Area CSS
 - 17.0 Widget Area CSS
 - 18.0 Breadcrumb Area CSS
 - 19.0 Blog Area CSS
@@ -382,7 +369,7 @@ input:focus {
 /* :: 5.0 Backtotop Area CSS */
 #scrollUp {
   position: fixed;
-  right: 40px;
+  right: 10px;
   font-size: 20px;
   line-height: 40px;
   width: 40px;
@@ -1814,18 +1801,18 @@ html .ui-button.ui-state-disabled:active {
         background-color: #1cc3b2;
         color: #ffffff; }
 
-/* :: 16.0 Contact Area CSS */
-.roberto-contact-form {
+/* :: 16.0 contato Area CSS */
+.roberto-contato-form {
   position: relative;
   z-index: 1; }
-  .roberto-contact-form h2 {
+  .roberto-contato-form h2 {
     margin-bottom: 30px;
     font-size: 22px;
     display: block; }
     @media only screen and (max-width: 767px) {
-      .roberto-contact-form h2 {
+      .roberto-contato-form h2 {
         font-size: 24px; } }
-  .roberto-contact-form .form-control {
+  .roberto-contato-form .form-control {
     width: 100%;
     height: 50px;
     padding: 0 20px;
@@ -1833,25 +1820,25 @@ html .ui-button.ui-state-disabled:active {
     color: #afb4bf;
     font-size: 14px;
     border: 1px solid #ebebeb; }
-    .roberto-contact-form .form-control:focus {
+    .roberto-contato-form .form-control:focus {
       box-shadow: none;
       border-color: #1cc3b2; }
-  .roberto-contact-form textarea.form-control {
+  .roberto-contato-form textarea.form-control {
     height: 150px;
     padding: 20px; }
 
-.google-maps-contact-info {
+.google-maps-contato-info {
   position: relative;
   z-index: 1;
   padding-left: 5%;
   padding-right: 5%;
   margin-top: -100px; }
   @media only screen and (min-width: 992px) and (max-width: 1199px) {
-    .google-maps-contact-info {
+    .google-maps-contato-info {
       padding-left: 2%;
       padding-right: 2%; } }
 
-.google-maps-contact-content {
+.google-maps-contato-content {
   position: relative;
   z-index: 1;
   background-color: #ffffff;
@@ -1860,47 +1847,47 @@ html .ui-button.ui-state-disabled:active {
   box-shadow: 0 2px 40px 8px rgba(15, 15, 15, 0.15);
   padding: 35px; }
   @media only screen and (max-width: 767px) {
-    .google-maps-contact-content {
+    .google-maps-contato-content {
       padding: 20px; } }
-  .google-maps-contact-content .single-contact-info {
+  .google-maps-contato-content .single-contato-info {
     position: relative;
     z-index: 1;
     text-align: center;
     margin-bottom: 40px; }
     @media only screen and (min-width: 992px) and (max-width: 1199px) {
-      .google-maps-contact-content .single-contact-info h4 {
+      .google-maps-contato-content .single-contato-info h4 {
         font-size: 16px; } }
     @media only screen and (max-width: 767px) {
-      .google-maps-contact-content .single-contact-info h4 {
+      .google-maps-contato-content .single-contato-info h4 {
         font-size: 14px; } }
-    .google-maps-contact-content .single-contact-info i {
+    .google-maps-contato-content .single-contato-info i {
       display: inline-block;
       font-size: 30px;
       margin-bottom: 15px;
       color: #1cc3b2; }
       @media only screen and (max-width: 767px) {
-        .google-maps-contact-content .single-contact-info i {
+        .google-maps-contato-content .single-contato-info i {
           font-size: 24px; } }
-    .google-maps-contact-content .single-contact-info p {
+    .google-maps-contato-content .single-contato-info p {
       margin-bottom: 0; }
       @media only screen and (min-width: 992px) and (max-width: 1199px) {
-        .google-maps-contact-content .single-contact-info p {
+        .google-maps-contato-content .single-contato-info p {
           font-size: 12px; } }
       @media only screen and (max-width: 767px) {
-        .google-maps-contact-content .single-contact-info p {
+        .google-maps-contato-content .single-contato-info p {
           font-size: 12px; } }
-  .google-maps-contact-content .google-maps {
+  .google-maps-contato-content .google-maps {
     position: relative;
     z-index: 1; }
-    .google-maps-contact-content .google-maps iframe {
+    .google-maps-contato-content .google-maps iframe {
       width: 100%;
       height: 500px;
       border: none; }
       @media only screen and (min-width: 992px) and (max-width: 1199px) {
-        .google-maps-contact-content .google-maps iframe {
+        .google-maps-contato-content .google-maps iframe {
           height: 400px; } }
       @media only screen and (max-width: 767px) {
-        .google-maps-contact-content .google-maps iframe {
+        .google-maps-contato-content .google-maps iframe {
           height: 300px; } }
 
 /* :: 17.0 Widget Area CSS */
@@ -2046,10 +2033,10 @@ html .ui-button.ui-state-disabled:active {
     @media only screen and (max-width: 767px) {
       .breadcrumb-area .page-title {
         font-size: 24px; } }
-  .breadcrumb-area.contact-breadcrumb {
+  .breadcrumb-area.contato-breadcrumb {
     height: 400px; }
     @media only screen and (max-width: 767px) {
-      .breadcrumb-area.contact-breadcrumb {
+      .breadcrumb-area.contato-breadcrumb {
         height: 300px; } }
   .breadcrumb-area .room-title {
     font-size: 48px;

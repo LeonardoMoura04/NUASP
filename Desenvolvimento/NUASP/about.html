@@ -25,97 +25,68 @@
     </div>
     <!-- /Preloader -->
 
-    <!-- começo da Header -->
-    <header class="header-area">
-        <!-- Search Form -->
-        <div class="search-form d-flex align-items-center">
-            <div class="container">
-                <form action="index.html" method="get">
-                    <input type="search" name="search-form-input" id="searchFormInput" placeholder="Type your keyword ...">
-                    <button type="submit"><i class="icon_search"></i></button>
-                </form>
-            </div>
-        </div>
-
    <!-- começo da Header -->
    <header class="header-area">
     <!-- Search Form -->
-    <div class="search-form d-flex align-items-center">
-        <div class="container">
-            <form action="index.html" method="get">
-                <input type="search" name="search-form-input" id="searchFormInput" placeholder="Digite sua busca...">
-                <button type="submit"><i class="icon_search"></i></button>
-            </form>
+    <!-- Main Header Start -->
+    <div class="main-header-area">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between" id="robertoNav">
+
+                    <!-- Logo -->
+                    <a class="nav-brand" href="index.html"><img style="width: 156px;" src="./img/core-img//LogoCompleta/LogoPadrao.png" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+                        <!-- Menu Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul id="nav">
+                                <li><a href="#">Vamos Negociar</a>
+                                    <ul class="dropdown">
+                                        <li><a href="https://api.whatsapp.com/send?phone=${encodeURIComponent(5519995937087)}&text=Olá, quero negociar!">- Por Whatsapp</a></li>
+                                        <li><a href="tel:551995937087">- Por Ligação</a></li>
+                                        <li><a href="./ListagemBoletos.html">- 2ª via Boleto</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./contato.html">Contato</a></li>
+                                <li><a href="./about.html">Sobre</a></li>
+                            </ul>
+
+                            <!-- Book Now -->
+                            <div class="book-now-btn ml-3 ml-lg-5">
+                                <a href="#">Entrar <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
         </div>
     </div>
-
- 
 </header>
-   <!-- Main Header Start -->
-   <div class="main-header-area">
-    <div class="classy-nav-container breakpoint-off">
-        <div class="container">
-            <!-- Classy Menu -->
-            <nav class="classy-navbar justify-content-between" id="robertoNav">
-
-                <!-- Logo -->
-                <a class="nav-brand" href="index.html"><img style="width: 156px;" src="./img/core-img//LogoCompleta/LogoPadrao.png" alt=""></a>
-
-                <!-- Navbar Toggler -->
-                <div class="classy-navbar-toggler">
-                    <span class="navbarToggler"><span></span><span></span><span></span></span>
-                </div>
-
-                <!-- Menu -->
-                <div class="classy-menu">
-                    <!-- Menu Close Button -->
-                    <div class="classycloseIcon">
-                        <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                    </div>
-                    <!-- Nav Start -->
-                    <div class="classynav">
-                        <ul id="nav">
-                            <li><a href="#">Vamos Negociar</a>
-                                <ul class="dropdown">
-                                    <li><a href="./index.html">- Sou Aluno</a></li>
-                                    <li><a href="./single-room.html">- Sou Instituição</a></li>
-                                    <li><a href="./blog.html">- 2ª via Boleto</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./contato.html">Contato</a></li>
-                            <li><a href="./about.html">Sobre</a></li>
-                        </ul>
-
-                        <!-- Search -->
-                        <div class="search-btn ml-4">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </div>
-
-                        <!-- Book Now -->
-                        <div class="book-now-btn ml-3 ml-lg-5">
-                            <a href="#">Entrar <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                    <!-- Nav End -->
-                </div>
-            </nav>
-        </div>
-    </div>
-</div>
-    </header>
-    <!-- Fim da Header -->
-
+<!-- Fim da Header -->
     <!-- Breadcrumb Area Start -->
     <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/16.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">About Us</h2>
+                        <h2 class="page-title">Sobre nós</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                                <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Sobre</li>
                             </ol>
                         </nav>
                     </div>
@@ -131,19 +102,18 @@
             <div class="row align-items-center">
                 <div class="col-12 col-lg-6">
                     <div class="about-thumbnail pr-lg-5 mb-100 wow fadeInUp" data-wow-delay="100ms">
-                        <img src="img/bg-img/19.jpg" alt="">
+                        <img src="img/core-img/LogoMiniatura/Ativo 20.png" style="width: 350px;" alt="">
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <!-- Section Heading -->
                     <div class="section-heading wow fadeInUp" data-wow-delay="300ms">
-                        <h6>Testimonials</h6>
-                        <h2>20 Years Of Experience</h2>
+                        <h6>NUASP</h6>
+                        <h2>Sobre nós</h2>
                     </div>
                     <div class="about-content mb-100 wow fadeInUp" data-wow-delay="500ms">
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia dese mollit anim id est laborum. Sed ut perspiciatis unde omnis iste.</p>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia dese mollit anim id est laborum. Sed ut perspiciatis unde omnis iste. Lorem Ipsum available.</p>
-                        <img src="img/core-img/signature.png" alt="">
+                        <p>Projeto desevolvido para o 7º Semestre de Sistemas de informação</p>
+                        <p>Desenvolvido por Matheus Alves Bonotto Santos e Leonardo Moura</p>
                     </div>
                 </div>
             </div>
@@ -151,114 +121,47 @@
     </section>
     <!-- About Us Area End -->
 
-    <!-- Video Area Start -->
-    <div class="roberto--video--area bg-img bg-overlay jarallax section-padding-0-100" style="background-image: url(img/bg-img/20.jpg);">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center justify-content-center">
-                <div class="col-12 col-md-6">
-                    <!-- Section Heading -->
-                    <div class="section-heading text-center white wow fadeInUp" data-wow-delay="100ms">
-                        <h6>Ultimate Solutions</h6>
-                        <h2>Our Hotel &amp; Room</h2>
-                    </div>
-                    <div class="video-content-area mt-100 wow fadeInUp" data-wow-delay="500ms">
-                        <a href="https://www.youtube.com/watch?v=Ldd8yjjo6jA" class="video-play-btn"><i class="fa fa-play"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Video Area End -->
+    
 
-    <!-- Service Area Start -->
-    <section class="roberto-service-area section-padding-100-0">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Section Heading -->
-                    <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
-                        <h6>Ultimate Solutions</h6>
-                        <h2>Our Hotel &amp; Room</h2>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <!-- Single Service Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-service-area mb-100 wow fadeInUp" data-wow-delay="300ms">
-                        <img src="img/bg-img/21.jpg" alt="">
-                        <div class="service-title d-flex align-items-center justify-content-center">
-                            <h5>Restaurant &amp; Bar</h5>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Service Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-service-area mb-100 wow fadeInUp" data-wow-delay="500ms">
-                        <img src="img/bg-img/22.jpg" alt="">
-                        <div class="service-title d-flex align-items-center justify-content-center">
-                            <h5>Spa &amp; Fitness</h5>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Service Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-service-area mb-100 wow fadeInUp" data-wow-delay="700ms">
-                        <img src="img/bg-img/23.jpg" alt="">
-                        <div class="service-title d-flex align-items-center justify-content-center">
-                            <h5>Pool &amp; Party</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Service Area End -->
-
-     <!-- Footer Area Start -->
-     <footer class="footer-area section-padding-80-0">
+    <!-- Footer Area Start -->
+    <footer class="footer-area section-padding-80-0">
         <!-- Main Footer Area -->
         <div class="main-footer-area">
             <div class="container">
                 <div class="row align-items-baseline justify-content-between">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="single-footer-widget mb-80">
+                            <div class="row">
+                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-3.png" alt=""></span>
+                                <span class="col-9" data-img-url="img/img-core/icon-3.png">Whatsapp<br> (19) 99593-7087</span>
+                            </div>
+                            <div class="row">
+                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-2.png" alt=""></span>
+                                <span class="col-9" data-img-url="img/img-core/icon-3.png">Telefone<br> (19) 99593-7087</span>
+                            </div>
+                            <div class="row">
+                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-4.png" alt=""></span>
+                                <span class="col-9" data-img-url="img/img-core/icon-3.png">E-mail<br>ma.santos@nuasp.org.br</span>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- Single Footer Widget Area -->
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-footer-widget mb-80">
                             <!-- Footer Logo -->
-                            <a href="#" class="footer-logo"><img style="width: 220px;" src="img/core-img/LogoCompleta/Ativo 3.png" alt=""></a>
-
-                            <h4>(19) 99593-7087</h4>
-                            <span>ma.bonotto@nunasp.com.br</span>
+                            <br>
+                            <a href="#" class="footer-logo"><img style="width: 220px;"
+                                    src="img/core-img/LogoCompleta/Ativo 3.png" alt=""></a>
                         </div>
                     </div>
-
-                    <!-- Single Footer Widget Area -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget mb-80">
-                            <!-- Widget Title -->
-                            <h5 class="widget-title">Our Blog</h5>
-
-                            <!-- Single Blog Area -->
-                            <div class="latest-blog-area">
-                                <a href="#" class="post-title">Freelance Design Tricks How</a>
-                                <span class="post-date"><i class="fa fa-clock-o" aria-hidden="true"></i> Jan 02, 2019</span>
-                            </div>
-
-                            <!-- Single Blog Area -->
-                            <div class="latest-blog-area">
-                                <a href="#" class="post-title">Free Advertising For Your Online</a>
-                                <span class="post-date"><i class="fa fa-clock-o" aria-hidden="true"></i> Jan 02, 2019</span>
-                            </div>
-                        </div>
-                    </div>
-
+                   
                     <!-- Single Footer Widget Area -->
                     <div class="col-12 col-sm-4 col-lg-2">
                         <div class="single-footer-widget mb-80">
                             <!-- Widget Title -->
                             <h5 class="widget-title">Links</h5>
-
+    
                             <!-- Footer Nav -->
                             <ul class="footer-nav">
                                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Sobre Nós</a></li>
@@ -267,41 +170,21 @@
                             </ul>
                         </div>
                     </div>
-
-                    <!-- Single Footer Widget Area -->
-                    <div class="col-12 col-sm-8 col-lg-4">
-                        <div class="single-footer-widget mb-80">
-                            <!-- Widget Title -->
-                            <h5 class="widget-title">Subscribe Newsletter</h5>
-                            <span>Subscribe our newsletter gor get notification about new updates.</span>
-
-                            <!-- Newsletter Form -->
-                            <form action="index.html" class="nl-form">
-                                <input type="email" class="form-control" placeholder="Entre com seu email">
-                                <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-
+    
         <!-- Copywrite Area -->
         <div class="container">
             <div class="copywrite-content">
-                <div class="row align-items-center">
-                    <div class="col-12 col-md-8">
-                        <!-- Copywrite Text -->
-                        <div class="copywrite-text">
-                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos os direitos reservados | NUASP</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4">
-                    </div>
+                <div class="text-center col-12 copywrite-text">
+                    <p>Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> Todos os direitos reservados |
+                        NUASP</a>
+                    </p>
                 </div>
             </div>
+        </div>
         </div>
     </footer>
     <!-- Footer Area End -->
@@ -317,8 +200,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos
     <script src="js/roberto.bundle.js"></script>
     <!-- Active -->
     <script src="js/default-assets/active.js"></script>
-   <!-- Chat -->
-   <script src="//code-sa1.jivosite.com/widget/mu3gyOPnYJ" async></script>
+    <!-- Chat -->
+    <script src="//code-sa1.jivosite.com/widget/dyTFLPdSAj" async></script>
+
+
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,43 +8,24 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="login.css">
     <title>Entrar como</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+            $("#myModal").load("Modal-Login.html");
+        });
+    </script>
 </head>
+
 <body>
     <div id="preloader">
         <div class="loader"></div>
     </div>
     <div class="row" style="max-width: 100.8%;">
-        <Div class="col-md-6 col-sm-12 bg-instituicao single-welcome-slide bg-img bg-overlay" >
-                <!-- <img class="logo" src="img/core-img/LogoCompleta/Ativo 5.png"> -->
-                <div class="welcome-content h-100">
-                    <div class="container h-100">
-                        <div class="row h-100 align-items-center">
-                            <!-- Welcome Text -->
-                            <div class="row">
-                            </div>
-                            <div class="col-12">
-                                <div class="welcome-text text-center">
-                                    <h2 data-animation="fadeInLeft" data-delay="500ms">Instituição</h2>
-                                    <h6>Acesso ao conteúdo relacionado Administração do sistema.</h6>
-                                    <a href="#" class="btn roberto-btn btn-2 exibir" data-animation="fadeInUp" data-delay="800ms">Acessar</a>
-                                </div>
-                            </div>
-                            <div class="container">
-                                <form class="form-signin form" method="POST" action="envioUsuario.php">
-                                    <input type="usuario" id="input" class="form-control" placeholder="Usuario" name="usuario" required>
-                                    <input type="senha" id="input" class="form-control" placeholder="Senha" name="senha" required>
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </Div>
-
-
-        <Div class="col-md-6 col-sm-12 bg-aluno single-welcome-slide bg-img bg-overlay form">
-             
-             <div class="welcome-content h-100">
+        <Div class="col-md-6 col-sm-12 bg-instituicao single-welcome-slide bg-img bg-overlay">
+            <!-- <img class="logo" src="img/core-img/LogoCompleta/Ativo 5.png"> -->
+            <div class="welcome-content h-100">
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <!-- Welcome Text -->
@@ -51,36 +33,63 @@
                         </div>
                         <div class="col-12">
                             <div class="welcome-text text-center">
-                                <h2 data-animation="fadeInLeft" data-delay="500ms">Aluno</h2>
-                                <h6>Acesso e Negocie com um de nossos atendentes.</h6>
-                                <a href="#" class="btn roberto-btn btn-2 exibir" data-animation="fadeInUp" data-delay="800ms">Acessar</a>
+                                <h2 data-animation="fadeInLeft" data-delay="500ms">Instituição</h2>
+                                <h6>Acesso ao conteúdo relacionado Administração do sistema.</h6>
+                                <a id="myBtn" data-toggle="modal" data-target="#" href="#" class="btn roberto-btn btn-2"
+                                    data-animation="fadeInUp" data-delay="800ms">Acessar</a>
                             </div>
                         </div>
                         <div class="container">
-                            <form class="form-signin form" method="POST" action="envioUsuario.php">
-                                <input type="usuario" id="input" class="form-control" placeholder="Instituicao" name="usuario" required>
-                                <input type="senha" id="input" class="form-control" placeholder="Senha" name="senha" required>
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </Div>    
+        </Div>
+
+
+        <Div class="col-md-6 col-sm-12 bg-aluno single-welcome-slide bg-img bg-overlay form">
+
+            <div class="welcome-content h-100">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <!-- Welcome Text -->
+                        <div class="row">
+                        </div>
+                        <div class="col-12">
+                            <div class="welcome-text text-center" aria-hidden="true">
+                                <h2 data-animation="fadeInLeft" data-delay="500ms">Aluno</h2>
+                                <h6>Acesso e Negocie com um de nossos atendentes.</h6>
+                                <a id="myBtn" data-toggle="modal" data-target="#" href="#" class="btn roberto-btn btn-2"
+                                    data-animation="fadeInUp" data-delay="800ms">Acessar</a>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <!-- The Modal -->
+                            <div id="myModal" class="modal"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Div>
     </div>
-    
-    </script>
-        <!-- jQuery 2.2.4 -->
-        <script src="js/jquery.min.js"></script>
-        <!-- Popper -->
-        <script src="js/popper.min.js"></script>
-        <!-- Bootstrap -->
-        <script src="js/bootstrap.min.js"></script>
-        <!-- All Plugins -->
-        <script src="js/roberto.bundle.js"></script>
-        <!-- Active -->
-        <script src="js/default-assets/active.js"></script>
-        <!-- Login -->
-        <script src="js/script-login.js"></script>
+
+<!-- Footer Area End -->
+
+    <!-- **** All JS Files ***** -->
+    <!-- jQuery 2.2.4 -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Popper -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- All Plugins -->
+    <script src="js/roberto.bundle.js"></script>
+    <!-- Active -->
+    <script src="js/default-assets/active.js"></script>
+    <!-- Chat -->
+    <script src="//code-sa1.jivosite.com/widget/dyTFLPdSAj" async></script>
+
+
 </body>
+
 </html>

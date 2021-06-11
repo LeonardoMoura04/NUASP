@@ -1,10 +1,4 @@
-<?php
-    header("Access-Control-Allow-Origin: *");
-    header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Methods: POST");
-    header("Access-Control-Max-Age: 3600");
-    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    
+<?php 
     include_once '../config/database.php';
     include_once '../objects/aluno.php';
     
@@ -13,23 +7,21 @@
     
     $aluno = new Aluno($db);
     
-    $data = json_decode(file_get_contents("php://input"));
-    
     // Setar o Id que será desativado
-    $aluno->id = $data->id;
+    $aluno->id = isset($_GET['id']) ? $_GET['id'] : die();
     
     // Setar valores das propriedades
     $aluno->isAtivo = 0;
     
     // Update Aluno
     if($aluno->deactivateActivate()){
-    
-        http_response_code(200);
-        echo json_encode(array("message" => "Registro desativado com sucesso."));
+        // http_response_code(200);
+        // echo json_encode(array("message" => "Registro desativado com sucesso."));
+        echo "<meta http-equiv='refresh' content='0;url=../../../ListagemAlunos.php?response=Sucesso'>";
     }
     else{
-    
-        http_response_code(503);
-        echo json_encode(array("message" => "Não foi possível desativar o registro."));
+        // http_response_code(503);
+        // echo json_encode(array("message" => "Não foi possível ativar o registro."));
+        echo "<meta http-equiv='refresh' content='0;url=../../../ListagemAlunos.php?response=Erro'>";
     }
 ?>

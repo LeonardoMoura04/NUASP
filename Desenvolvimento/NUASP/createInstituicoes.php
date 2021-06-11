@@ -3,8 +3,8 @@
     require_once "config.php";
     
     // Define variables and initialize with empty values
-    $nome = $cpf = $telefone = $email = $dataNascimento = $senha = "";
-    $nome_err = $cpf_err = $telefone_err = $email_err = $dataNascimento_err = $senha_err = "";
+    $nome = $cnpj = "";
+    $nome_err = $cnpj_err = "";
     
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -19,62 +19,30 @@
             $nome = $input_nome;
         }
         
-        $input_cpf = trim($_POST["cpf"]);
-        if(empty($input_cpf)){
-            $cpf_err = "Por favor, insira seu CPF.";     
+        $input_cnpj = trim($_POST["cnpj"]);
+        if(empty($input_cnpj)){
+            $cnpj_err = "Por favor, insira seu cnpj.";     
         } else{
-            $cpf = $input_cpf;
-        }
-
-        $input_cpf = trim($_POST["telefone"]);
-        if(empty($input_cpf)){
-            $telefone_err = "Por favor, insira seu Telefone.";     
-        } else{
-            $telefone = $input_cpf;
-        }
-
-        $input_email = trim($_POST["email"]);
-        if(empty($input_email)){
-            $email_err = "Por favor, insira seu Email.";     
-        } else{
-            $email = $input_email;
-        }
-
-        $input_dataNascimento = trim($_POST["dataNascimento"]);
-        if(empty($input_dataNascimento)){
-            $dataNascimento_err = "Por favor, insira sua Data de Nascimento.";     
-        } else{
-            $dataNascimento = $input_dataNascimento;
-        }
-
-        $input_senha = trim($_POST["senha"]);
-        if(empty($input_senha)){
-            $senha_err = "Por favor, insira sua Senha.";     
-        } else{
-            $senha = $input_senha;
+            $cnpj = $input_cnpj;
         }
         
         // Check input errors before inserting in database
-        if(empty($nome_err) && empty($cpf_err) && empty($telefone_err) && empty($email_err) && empty($dataNascimento_err) && empty($senha_err)){
+        if(empty($nome_err) && empty($cnpj_err)){
             // Prepare an insert statement
-            $sql = "INSERT INTO Aluno (nome, cpf, telefone, email, dataNascimento, senha) VALUES (?, ?, ?, ?, ?, ?);";
+            $sql = "INSERT INTO Instituicao (nome, cnpj) VALUES (?, ?);";
             
             if($stmt = mysqli_prepare($link, $sql)){
                 // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param($stmt, "ssssss", $param_nome, $param_cpf, $param_telefone, $param_email, $param_dataNascimento, $param_senha);
+                mysqli_stmt_bind_param($stmt, "ssssss", $param_nome, $param_cnpj);
                 
                 // Set parameters
                 $param_nome = $nome;
-                $param_cpf = $cpf;
-                $param_telefone = $telefone;
-                $param_email = $email;
-                $param_dataNascimento = date($dataNascimento);
-                $param_senha = password_hash($senha, PASSWORD_DEFAULT);
+                $param_cnpj = $cnpj;
                 
                 // Attempt to execute the prepared statement
                 if(mysqli_stmt_execute($stmt)){
                     // Records created successfully. Redirect to landing page
-                    header("location: listagemAlunosTeste.php");
+                    header("location: listagemInstituicoes.php");
                     exit();
                 } else{
                     echo "Oops! Something went wrong. Please try again later.";
@@ -194,7 +162,7 @@
 
                                 <!-- Book Now -->
                                 <div class="book-now-btn ml-3 ml-lg-5">
-                                <a href="#">Sair</a>
+                                    <<a href="#">Sair</a>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -213,12 +181,12 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Cadastro de Alunos</h2>
+                        <h2 class="page-title">Cadastro de Instituicoes</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Alunos</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Listagem de Alunos</li>
-                                <li class="breadcrumb-item active" aria-current="page">Cadastro de Alunos</li>
+                                <li class="breadcrumb-item"><a href="index.html">Instituicoes</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Instituicoes</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cadastro de Instituicoes</li>
                             </ol>
                         </nav>
                     </div>
@@ -232,7 +200,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5">Cadastro de Alunos</h2>
+                    <h2 class="mt-5">Cadastro de Instituicoes</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
                             <label>Name</label>
@@ -240,32 +208,12 @@
                             <span class="invalid-feedback"><?php echo $nome_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>CPF</label>
-                            <input type="text" name="cpf" class="form-control <?php echo (!empty($cpf_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $cpf; ?>">
-                            <span class="invalid-feedback"><?php echo $cpf_err;?></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Telefone</label>
-                            <input type="text" name="telefone" class="form-control <?php echo (!empty($telefone_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $telefone; ?>">
-                            <span class="invalid-feedback"><?php echo $telefone_err;?></span>
-                        </div>
-                        <div class="form-group">
-                            <label>E-mail</label>
-                            <input type="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
-                            <span class="invalid-feedback"><?php echo $email_err;?></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Data de Nascimento</label>
-                            <input type="date" name="dataNascimento" class="form-control <?php echo (!empty($dataNascimento_err)) ? 'is-invalid' : ''; ?>" value="<?php echo date($dataNascimento); ?>">
-                            <span class="invalid-feedback"><?php echo $dataNascimento_err;?></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Senha</label>
-                            <input type="password" name="senha" class="form-control <?php echo (!empty($senha_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $senha; ?>">
-                            <span class="invalid-feedback"><?php echo $senha_err;?></span>
+                            <label>cnpj</label>
+                            <input type="text" name="cnpj" class="form-control <?php echo (!empty($cnpj_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $cnpj; ?>">
+                            <span class="invalid-feedback"><?php echo $cnpj_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Cadastrar">
-                        <a href="listagemAlunosTeste.php" class="btn btn-secondary ml-2">Cancelar</a>
+                        <a href="listagemInstituicoes.php" class="btn btn-secondary ml-2">Cancelar</a>
                     </form>
                 </div>
             </div>        

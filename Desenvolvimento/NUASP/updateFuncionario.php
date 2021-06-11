@@ -7,8 +7,10 @@
     $nome_err = $cpf_err = $telefone_err = $email_err = $dataNascimento_err = $senha_err = "";
     
     // Processing form data when form is submitted
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-
+    if(isset($_POST["id"]) && !empty($_POST["id"])){
+        // Get hidden input value
+        $id = $_POST["id"];
+        
         // Validações
         $input_nome = trim($_POST["nome"]);
         if(empty($input_nome)){
@@ -56,12 +58,21 @@
         
         // Check input errors before inserting in database
         if(empty($nome_err) && empty($cpf_err) && empty($telefone_err) && empty($email_err) && empty($dataNascimento_err) && empty($senha_err)){
-            // Prepare an insert statement
-            $sql = "INSERT INTO Aluno (nome, cpf, telefone, email, dataNascimento, senha) VALUES (?, ?, ?, ?, ?, ?);";
+            // Prepare an update statement
+            $sql = "UPDATE Funcionario
+                    SET 
+                        nome = ?, 
+                        cpf = ?, 
+                        telefone = ?, 
+                        email = ?, 
+                        dataNascimento = ?, 
+                        senha = ?
+                    WHERE
+                        id = ?";
             
             if($stmt = mysqli_prepare($link, $sql)){
                 // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param($stmt, "ssssss", $param_nome, $param_cpf, $param_telefone, $param_email, $param_dataNascimento, $param_senha);
+                mysqli_stmt_bind_param($stmt, "ssssssi", $param_nome, $param_cpf, $param_telefone, $param_email, $param_dataNascimento, $param_senha, $param_id);
                 
                 // Set parameters
                 $param_nome = $nome;
@@ -70,11 +81,12 @@
                 $param_email = $email;
                 $param_dataNascimento = date($dataNascimento);
                 $param_senha = password_hash($senha, PASSWORD_DEFAULT);
+                $param_id = $id;
                 
                 // Attempt to execute the prepared statement
                 if(mysqli_stmt_execute($stmt)){
-                    // Records created successfully. Redirect to landing page
-                    header("location: listagemAlunosTeste.php");
+                    // Records updated successfully. Redirect to landing page
+                    header("location: listagemFuncionarios.php");
                     exit();
                 } else{
                     echo "Oops! Something went wrong. Please try again later.";
@@ -87,6 +99,58 @@
         
         // Close connection
         mysqli_close($link);
+    }else{
+        // Check existence of id parameter before processing further
+        if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
+            // Get URL parameter
+            $id =  trim($_GET["id"]);
+            
+            // Prepare a select statement
+            $sql = "SELECT * FROM Funcionario WHERE id = ?";
+            if($stmt = mysqli_prepare($link, $sql)){
+                // Bind variables to the prepared statement as parameters
+                mysqli_stmt_bind_param($stmt, "i", $param_id);
+                
+                // Set parameters
+                $param_id = $id;
+                
+                // Attempt to execute the prepared statement
+                if(mysqli_stmt_execute($stmt)){
+                    $result = mysqli_stmt_get_result($stmt);
+        
+                    if(mysqli_num_rows($result) == 1){
+                        /* Fetch result row as an associative array. Since the result set
+                        contains only one row, we don't need to use while loop */
+                        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                        
+                        // Retrieve individual field value
+                        $nome = $row["nome"];
+                        $cpf = $row["cpf"];
+                        $telefone = $row["telefone"];
+                        $email = $row["email"];
+                        $dataNascimento = $row["dataNascimento"];
+                        $isAtivo = $row["isAtivo"];
+                    } else{
+                        // URL doesn't contain valid id. Redirect to error page
+                        header("location: error.php");
+                        exit();
+                    }
+                    
+                } else{
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+            }
+            
+            // Close statement
+            mysqli_stmt_close($stmt);
+            
+            // Close connection
+            mysqli_close($link);
+        }  else{
+            // URL doesn't contain id parameter. Redirect to error page
+            header("location: error.php");
+            exit();
+        }
     }
 ?>
 
@@ -194,7 +258,7 @@
 
                                 <!-- Book Now -->
                                 <div class="book-now-btn ml-3 ml-lg-5">
-                                <a href="#">Sair</a>
+                                    <a href="#">Sair</a>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -206,19 +270,18 @@
     </header>
     <!-- Fim da Header -->
 
-
     <!-- Breadcrumb Area Start -->
     <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/4.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Cadastro de Alunos</h2>
+                        <h2 class="page-title">Atualizar Funcionarios</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Alunos</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Listagem de Alunos</li>
-                                <li class="breadcrumb-item active" aria-current="page">Cadastro de Alunos</li>
+                                <li class="breadcrumb-item"><a href="index.html">Funcionarios</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Funcionarios</li>
+                                <li class="breadcrumb-item active" aria-current="page">Atualizar Funcionarios</li>
                             </ol>
                         </nav>
                     </div>
@@ -232,9 +295,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5">Cadastro de Alunos</h2>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <div class="form-group">
+                    <h2 class="mt-5">Atualizar Funcionario</h2>
+                    <p>Por favor, edite os valores para alterar o registro.</p>
+                    <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
+                    <div class="form-group">
                             <label>Name</label>
                             <input type="text" name="nome" class="form-control <?php echo (!empty($nome_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $nome; ?>">
                             <span class="invalid-feedback"><?php echo $nome_err;?></span>
@@ -264,14 +328,14 @@
                             <input type="password" name="senha" class="form-control <?php echo (!empty($senha_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $senha; ?>">
                             <span class="invalid-feedback"><?php echo $senha_err;?></span>
                         </div>
-                        <input type="submit" class="btn btn-primary" value="Cadastrar">
-                        <a href="listagemAlunosTeste.php" class="btn btn-secondary ml-2">Cancelar</a>
+                        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+                        <input type="submit" class="btn btn-primary" value="Atualizar">
+                        <a href="listagemFuncionarios.php" class="btn btn-secondary ml-2">Cancelar</a>
                     </form>
                 </div>
             </div>        
         </div>
     </div>
-    <br>
 
     <!-- Footer Area Start -->
     <footer class="footer-area section-padding-80-0">

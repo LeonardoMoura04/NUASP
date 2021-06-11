@@ -76,7 +76,7 @@
 
                                 <!-- Book Now -->
                                 <div class="book-now-btn ml-3 ml-lg-5">
-                                    <a data-toggle="modal" data-target="#modalLoginForm" href="#">Entrar <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                <a href="#">Sair</a>
                                 </div>
                             </div>
                             <!-- Nav End -->

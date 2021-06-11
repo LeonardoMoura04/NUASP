@@ -57,7 +57,7 @@
         // Check input errors before inserting in database
         if(empty($nome_err) && empty($cpf_err) && empty($telefone_err) && empty($email_err) && empty($dataNascimento_err) && empty($senha_err)){
             // Prepare an insert statement
-            $sql = "INSERT INTO Aluno (nome, cpf, telefone, email, dataNascimento, senha) VALUES (?, ?, ?, ?, ?, ?);";
+            $sql = "INSERT INTO Funcionario (nome, cpf, telefone, email, dataNascimento, senha) VALUES (?, ?, ?, ?, ?, ?);";
             
             if($stmt = mysqli_prepare($link, $sql)){
                 // Bind variables to the prepared statement as parameters
@@ -74,7 +74,7 @@
                 // Attempt to execute the prepared statement
                 if(mysqli_stmt_execute($stmt)){
                     // Records created successfully. Redirect to landing page
-                    header("location: listagemAlunosTeste.php");
+                    header("location: listagemFuncionarios.php");
                     exit();
                 } else{
                     echo "Oops! Something went wrong. Please try again later.";
@@ -213,12 +213,12 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Cadastro de Alunos</h2>
+                        <h2 class="page-title">Cadastro de Funcionarios</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Alunos</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Listagem de Alunos</li>
-                                <li class="breadcrumb-item active" aria-current="page">Cadastro de Alunos</li>
+                                <li class="breadcrumb-item"><a href="index.html">Funcionarios</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Funcionarios</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cadastro de Funcionarios</li>
                             </ol>
                         </nav>
                     </div>
@@ -232,7 +232,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5">Cadastro de Alunos</h2>
+                    <h2 class="mt-5">Cadastro de Funcionarios</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
                             <label>Name</label>
@@ -265,7 +265,7 @@
                             <span class="invalid-feedback"><?php echo $senha_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Cadastrar">
-                        <a href="listagemAlunosTeste.php" class="btn btn-secondary ml-2">Cancelar</a>
+                        <a href="listagemFuncionarios.php" class="btn btn-secondary ml-2">Cancelar</a>
                     </form>
                 </div>
             </div>        

@@ -126,6 +126,8 @@ SELECT * FROM Instituicao;
 SELECT * FROM Parcelas;
 SELECT * FROM TipoPagamento;
 
+DELETE FROM Aluno WHERE id = 7 OR id = 8 OR id = 9;
+
 
 
 -- AREA DE TESTES --

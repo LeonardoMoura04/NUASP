@@ -15,6 +15,7 @@ class Funcionario{
     public $isAtivo;
     public $senha;
     public $instituicaoId;
+    
     public $instituicaoCnpj;
     public $instituicaoNome;
   
@@ -27,7 +28,7 @@ class Funcionario{
     function read(){
     
         // Query
-        $query = "SELECT f.*, i.cnpj AS cnpj, i.nome AS instituicaoNome FROM " . $this->table_name . " f INNER JOIN Instituicao i ON i.id = f.instituicaoId";
+        $query = "SELECT f.*, i.cnpj AS instituicaoCnpj, i.nome AS instituicaoNome FROM " . $this->table_name . " f INNER JOIN Instituicao i ON i.id = f.instituicaoId";
         
         // Preparar query
         $stmt = $this->conn->prepare($query);
@@ -43,7 +44,7 @@ class Funcionario{
 
         // Query
         $query = "INSERT INTO " . $this->table_name . " 
-                    SET nome=:nome, cpf=:cpf, telefone=:telefone, email=:email, dataNascimento=:dataNascimento, senha=:senha;";
+                    SET nome=:nome, cpf=:cpf, telefone=:telefone, email=:email, dataNascimento=:dataNascimento, senha=:senha, instituicaoId=:instituicaoId;";
     
         // Preparar query
         $stmt = $this->conn->prepare($query);
@@ -55,6 +56,7 @@ class Funcionario{
         $this->email=htmlspecialchars(strip_tags($this->email));
         $this->dataNascimento=htmlspecialchars(strip_tags($this->dataNascimento));
         $this->senha=htmlspecialchars(strip_tags($this->senha));
+        $this->instituicaoId=htmlspecialchars(strip_tags($this->instituicaoId));
     
         // Colocar valores (bind values)
         $stmt->bindParam(":nome", $this->nome);
@@ -63,6 +65,7 @@ class Funcionario{
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":dataNascimento", $this->dataNascimento);
         $stmt->bindParam(":senha", $this->senha);
+        $stmt->bindParam(":instituicaoId", $this->instituicaoId);
     
         // Executar query
         if($stmt->execute()){
@@ -76,8 +79,8 @@ class Funcionario{
     function readOne(){
     
         // Query
-        $query = "SELECT * FROM " . $this->table_name . " f INNER JOIN Instituicao i ON i.id = f.instituicaoId
-                WHERE id = ?";
+        $query = "SELECT f.*, i.cnpj AS instituicaoCnpj, i.nome AS instituicaoNome FROM " . $this->table_name . " f INNER JOIN Instituicao i ON i.id = f.instituicaoId
+                WHERE f.id = ?";
     
         $stmt = $this->conn->prepare( $query );
     
@@ -94,6 +97,9 @@ class Funcionario{
         $this->dataNascimento = $row['dataNascimento'];
         $this->isAtivo = $row['isAtivo'];
         $this->senha = $row['senha'];
+        $this->instituicaoId = $row['instituicaoId'];
+        $this->instituicaoCnpj = $row['instituicaoCnpj'];
+        $this->instituicaoNome = $row['instituicaoNome'];
     }
 
     // Update
@@ -108,7 +114,8 @@ class Funcionario{
                     telefone=:telefone, 
                     email=:email, 
                     dataNascimento=:dataNascimento, 
-                    senha=:senha
+                    senha=:senha,
+                    instituicaoId=:instituicaoId
                 WHERE
                     id = :id";
     
@@ -122,6 +129,7 @@ class Funcionario{
         $this->email=htmlspecialchars(strip_tags($this->email));
         $this->dataNascimento=htmlspecialchars(strip_tags($this->dataNascimento));
         $this->senha=htmlspecialchars(strip_tags($this->senha));
+        $this->instituicaoId=htmlspecialchars(strip_tags($this->instituicaoId));
     
         // Colocar valores (bind values)
         $stmt->bindParam(":nome", $this->nome);
@@ -130,6 +138,7 @@ class Funcionario{
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":dataNascimento", $this->dataNascimento);
         $stmt->bindParam(":senha", $this->senha);
+        $stmt->bindParam(":instituicaoId", $this->instituicaoId);
         $stmt->bindParam(':id', $this->id);
     
         // Executar query
@@ -197,7 +206,7 @@ class Funcionario{
         // Query
         $query = "SELECT *
                 FROM " . $this->table_name . " f INNER JOIN Instituicao i ON i.id = f.instituicaoId
-                WHERE nome LIKE ? OR cpf LIKE ? OR email LIKE ?";
+                WHERE f.nome LIKE ? OR f.cpf LIKE ? OR f.email LIKE ?";
     
         // Preparar query
         $stmt = $this->conn->prepare($query);
@@ -210,6 +219,29 @@ class Funcionario{
         $stmt->bindParam(1, $keywords);
         $stmt->bindParam(2, $keywords);
         $stmt->bindParam(3, $keywords);
+    
+        // Executar query
+        $stmt->execute();
+    
+        return $stmt;
+    }
+
+    // Search by CPF
+    function searchCPF($keywords){
+        
+        // Query
+        $query = "SELECT *
+                FROM " . $this->table_name . "
+                WHERE cpf = ?";
+    
+        // Preparar query
+        $stmt = $this->conn->prepare($query);
+    
+        // Limpar query
+        $keywords=htmlspecialchars(strip_tags($keywords));
+    
+        // Colocar valores (bind values)
+        $stmt->bindParam(1, $keywords);
     
         // Executar query
         $stmt->execute();

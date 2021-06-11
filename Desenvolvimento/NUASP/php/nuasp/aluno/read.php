@@ -1,7 +1,4 @@
 <?php
-    header("Access-Control-Allow-Origin: *");
-    header("Content-Type: application/json; charset=UTF-8");
-
     include_once '../config/database.php';
     include_once '../objects/aluno.php';
     
@@ -36,15 +33,12 @@
             array_push($alunos_arr["records"], $aluno_item);
         }
     
-        http_response_code(200);
+        //http_response_code(200);
         echo json_encode($alunos_arr);
     }
     else{
-        http_response_code(404);
-        
-        echo json_encode(
-            array("message" => "Registro não encontrado.")
-        );
+        //http_response_code(404);
+        //echo json_encode(array("message" => "Registro não encontrado."));
+        echo "<meta http-equiv='refresh' content='0;url=../../../ListagemAluno.php?response=Erro'>";
     }
-
 ?>

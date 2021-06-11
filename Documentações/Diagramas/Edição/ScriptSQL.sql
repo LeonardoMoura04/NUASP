@@ -126,12 +126,24 @@ SELECT * FROM Instituicao;
 SELECT * FROM Parcelas;
 SELECT * FROM TipoPagamento;
 
+DELETE FROM Aluno WHERE id = 7 OR id = 8 OR id = 9;
 
 
 
+-- AREA DE TESTES --
 INSERT INTO Aluno SET nome = 'Teste Set', cpf = 'Teste Set', telefone = 'Teste Set', email = 'Teste Set', dataNascimento = '2020-10-10', senha = 'Teste Set';
 
+SELECT f.*, i.cnpj AS instituicaoCnpj, i.nome AS instituicaoNome FROM Funcionario f INNER JOIN Instituicao i ON i.id = f.instituicaoId;
 
+SELECT d.*,
+i.cnpj AS instituicaoCnpj, i.nome AS instituicaoNome,
+a.nome AS alunoNome, a.cpf AS alunoCpf, a.email AS alunoEmail,
+tp.nome AS tipoPagamentoNome
+FROM Divida d
+INNER JOIN Instituicao i ON i.id = d.instituicaoId
+INNER JOIN Aluno a ON a.id = d.alunoId
+INNER JOIN TipoPagamento tp ON tp.id = d.tipoPagamentoId;
 
-
-
+UPDATE Funcionario
+SET isAtivo = 1
+WHERE id = 10;

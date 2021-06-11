@@ -213,5 +213,28 @@
         
             return $stmt;
         }
+
+        // Search by CPF
+        function searchCPF($keywords){
+        
+            // Query
+            $query = "SELECT *
+                    FROM " . $this->table_name . "
+                    WHERE cpf = ?";
+        
+            // Preparar query
+            $stmt = $this->conn->prepare($query);
+        
+            // Limpar query
+            $keywords=htmlspecialchars(strip_tags($keywords));
+        
+            // Colocar valores (bind values)
+            $stmt->bindParam(1, $keywords);
+        
+            // Executar query
+            $stmt->execute();
+        
+            return $stmt;
+        }
     }
 ?>

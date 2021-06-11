@@ -1,11 +1,4 @@
 <?php
-    // required headers
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Headers: access");
-    header("Access-Control-Allow-Methods: GET");
-    header("Access-Control-Allow-Credentials: true");
-    header('Content-Type: application/json');
-    
     include_once '../config/database.php';
     include_once '../objects/aluno.php';
     
@@ -31,12 +24,13 @@
             "senha" => $aluno->senha
         );
     
-        http_response_code(200);
+        //http_response_code(200);
         echo json_encode($aluno_arr);
     }
     
     else{
-        http_response_code(404);
-        echo json_encode(array("message" => "Registro não existe."));
+        // http_response_code(404);
+        // echo json_encode(array("message" => "Registro não existe."));
+        echo "<meta http-equiv='refresh' content='0;url=../../../ListagemAluno.php?response=Erro'>";
     }
 ?>

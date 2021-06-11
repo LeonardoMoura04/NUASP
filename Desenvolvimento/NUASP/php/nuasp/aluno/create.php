@@ -1,10 +1,4 @@
-<?php
-    header("Access-Control-Allow-Origin: *");
-    header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Methods: POST");
-    header("Access-Control-Max-Age: 3600");
-    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    
+<?php    
     include_once '../config/database.php';
     include_once '../objects/aluno.php';
     
@@ -12,42 +6,52 @@
     $db = $database->getConnection();
     
     $aluno = new Aluno($db);
-    
-    // get posted data
-    $data = json_decode(file_get_contents("php://input"));
+
+    // Pegar dados
+    if(isset($_POST['nome']))
+    {
+        $nome = $_POST['nome'] . ' ' . $_POST['sobrenome'];
+        $cpf = $_POST['cpf'];
+        $telefone = '(' . $_POST['ddd'] . ') ' . $_POST['telefone'];
+        $email = $_POST['email'];
+        $dataNascimento = $_POST['dataNasc'];
+        $senha = $_POST['senha'];
+    }
 
     // Verificar se os dados não estão vazios
     if(
-        !empty($data->nome) &&
-        !empty($data->cpf) &&
-        !empty($data->telefone) &&
-        !empty($data->email) &&
-        !empty($data->dataNascimento) &&
-        !empty($data->senha)
+        !empty($nome) &&
+        !empty($cpf) &&
+        !empty($telefone) &&
+        !empty($email) &&
+        !empty($dataNascimento) &&
+        !empty($senha)
     ){
-    
         // Setar valores dos alunos
-        $aluno->nome = $data->nome;
-        $aluno->cpf = $data->cpf;
-        $aluno->telefone = $data->telefone;
-        $aluno->email = $data->email;
-        $aluno->dataNascimento = date($data->dataNascimento);
-        $aluno->senha = $data->senha;
+        $aluno->nome = $nome;
+        $aluno->cpf = $cpf;
+        $aluno->telefone = $telefone;
+        $aluno->email = $email;
+        $aluno->dataNascimento = date($dataNascimento);
+        $aluno->senha = password_hash($senha, PASSWORD_DEFAULT);
 
         // Criar aluno
         if($aluno->create()){
-            http_response_code(201);
-            echo json_encode(array("message" => "Registro incluido com sucesso."));
+            //http_response_code(201);
+            //echo json_encode(array("message" => "Registro incluido com sucesso."));
+            echo "<meta http-equiv='refresh' content='0;url=../../../CadastroAluno.php?response=Sucesso'>";
         }
         else{
             // Não foi possível registrar o aluno por algum motivo.
-            http_response_code(503);
-            echo json_encode(array("message" => "Não foi possível incluir a informação."));
+            //http_response_code(503);
+            //echo json_encode(array("message" => "Não foi possível incluir a informação."));
+            echo "<meta http-equiv='refresh' content='0;url=../../../CadastroAluno.php?response=Erro'>";
         }
     }
     else{
         // Dados incompletos
-        http_response_code(400);
-        echo json_encode(array("message" => "Não foi possível incluir a informação. Os dados estão incompletos."));
+        //http_response_code(400);
+        //echo json_encode(array("message" => "Não foi possível incluir a informação. Os dados estão incompletos."));
+        echo "<meta http-equiv='refresh' content='0;url=../../../CadastroAluno.php?response=Incompleto'>";
     }
 ?>

@@ -1,10 +1,4 @@
 <?php
-    header("Access-Control-Allow-Origin: *");
-    header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Methods: POST");
-    header("Access-Control-Max-Age: 3600");
-    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    
     include_once '../config/database.php';
     include_once '../objects/funcionario.php';
     
@@ -14,40 +8,53 @@
     $funcionario = new Funcionario($db);
     
     // get posted data
-    $data = json_decode(file_get_contents("php://input"));
+    if(isset($_POST['nome']))
+    {
+        $nome = $_POST['nome'] . ' ' . $_POST['sobrenome'];
+        $cpf = $_POST['cpf'];
+        $telefone = '(' . $_POST['ddd'] . ') ' . $_POST['telefone'];
+        $email = $_POST['email'];
+        $dataNascimento = $_POST['dataNasc'];
+        $senha = $_POST['senha'];
+        $instituicaoId = $_POST['instituicaoId'];
+    }
 
     // Verificar se os dados não estão vazios
     if(
-        !empty($data->nome) &&
-        !empty($data->cpf) &&
-        !empty($data->telefone) &&
-        !empty($data->email) &&
-        !empty($data->dataNascimento) &&
-        !empty($data->senha)
+        !empty($nome) &&
+        !empty($cpf) &&
+        !empty($telefone) &&
+        !empty($email) &&
+        !empty($dataNascimento) &&
+        !empty($senha)/* &&
+        !empty($instituicaoId)*/
     ){
-    
         // Setar valores dos funcionarios
-        $funcionario->nome = $data->nome;
-        $funcionario->cpf = $data->cpf;
-        $funcionario->telefone = $data->telefone;
-        $funcionario->email = $data->email;
-        $funcionario->dataNascimento = date($data->dataNascimento);
-        $funcionario->senha = $data->senha;
+        $funcionario->nome = $nome;
+        $funcionario->cpf = $cpf;
+        $funcionario->telefone = $telefone;
+        $funcionario->email = $email;
+        $funcionario->dataNascimento = date($dataNascimento);
+        $funcionario->senha = password_hash($senha, PASSWORD_DEFAULT);
+        $funcionario->instituicaoId = $instituicaoId;
 
-        // Criar funcionario
+        // Criar Funcionario
         if($funcionario->create()){
-            http_response_code(201);
-            echo json_encode(array("message" => "Registro incluido com sucesso."));
+            //http_response_code(201);
+            //echo json_encode(array("message" => "Registro incluido com sucesso."));
+            echo "<meta http-equiv='refresh' content='0;url=../../../CadastroFuncionario.php?response=Sucesso'>";
         }
         else{
-            // Não foi possível registrar o funcionario por algum motivo.
-            http_response_code(503);
-            echo json_encode(array("message" => "Não foi possível incluir a informação."));
+            // Não foi possível registrar o Funcionario por algum motivo.
+            //http_response_code(503);
+            //echo json_encode(array("message" => "Não foi possível incluir a informação."));
+            echo "<meta http-equiv='refresh' content='0;url=../../../CadastroFuncionario.php?response=Erro'>";
         }
     }
     else{
         // Dados incompletos
-        http_response_code(400);
-        echo json_encode(array("message" => "Não foi possível incluir a informação. Os dados estão incompletos."));
+        //http_response_code(400);
+        //echo json_encode(array("message" => "Não foi possível incluir a informação. Os dados estão incompletos."));
+        echo "<meta http-equiv='refresh' content='0;url=../../../CadastroFuncionario.php?response=Incompleto'>";
     }
 ?>

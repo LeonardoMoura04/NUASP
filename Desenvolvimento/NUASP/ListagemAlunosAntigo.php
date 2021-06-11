@@ -29,7 +29,6 @@
         <div class="loader"></div>
     </div>
     <!-- /Preloader -->
-
     <!-- começo da Header -->
     <header class="header-area">
         <!-- Search Form -->
@@ -152,6 +151,7 @@
     </div>
     <!-- Fim Modal de Cadastro de Instituição -->
 
+
     <!-- Breadcrumb Area Start -->
     <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/16.jpg);">
         <div class="container h-100">
@@ -179,7 +179,7 @@
 
 
                 <div class="col-md-12">
-                    <h4>Boletos</h4>
+                    <h4>Bootstrap Snipp for Datatable</h4>
                     <div class="table-responsive">
 
 
@@ -193,7 +193,9 @@
                                 <th>Address</th>
                                 <th>Email</th>
                                 <th>Contact</th>
-                                <th></th>
+                                <th>Edit</th>
+
+                                <th>Delete</th>
                             </thead>
                             <tbody>
 
@@ -205,8 +207,16 @@
                                     <td>isometric.mohsin@gmail.com</td>
                                     <td>+923335586757</td>
                                     <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Pagar">
-                                            <h4>Pago</h3>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button
+                                                class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
+                                                data-target="#edit"><span
+                                                    class="glyphicon glyphicon-pencil"></span></button></p>
+                                    </td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><button
+                                                class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
+                                                data-target="#delete"><span
+                                                    class="glyphicon glyphicon-trash"></span></button></p>
                                     </td>
                                 </tr>
 
@@ -218,8 +228,83 @@
                                     <td>isometric.mohsin@gmail.com</td>
                                     <td>+923335586757</td>
                                     <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Pagar">
-                                            <button type="button" class="btn btn-light">Imprimir</button>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button
+                                                class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
+                                                data-target="#edit"><span
+                                                    class="glyphicon glyphicon-pencil"></span></button></p>
+                                    </td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><button
+                                                class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
+                                                data-target="#delete"><span
+                                                    class="glyphicon glyphicon-trash"></span></button></p>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td><input type="checkbox" class="checkthis" /></td>
+                                    <td>Mohsin</td>
+                                    <td>Irshad</td>
+                                    <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
+                                    <td>isometric.mohsin@gmail.com</td>
+                                    <td>+923335586757</td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button
+                                                class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
+                                                data-target="#edit"><span
+                                                    class="glyphicon glyphicon-pencil"></span></button></p>
+                                    </td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><button
+                                                class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
+                                                data-target="#delete"><span
+                                                    class="glyphicon glyphicon-trash"></span></button></p>
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td><input type="checkbox" class="checkthis" /></td>
+                                    <td>Mohsin</td>
+                                    <td>Irshad</td>
+                                    <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
+                                    <td>isometric.mohsin@gmail.com</td>
+                                    <td>+923335586757</td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button
+                                                class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
+                                                data-target="#edit"><span
+                                                    class="glyphicon glyphicon-pencil"></span></button></p>
+                                    </td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><button
+                                                class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
+                                                data-target="#delete"><span
+                                                    class="glyphicon glyphicon-trash"></span></button></p>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td><input type="checkbox" class="checkthis" /></td>
+                                    <td>Mohsin</td>
+                                    <td>Irshad</td>
+                                    <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
+                                    <td>isometric.mohsin@gmail.com</td>
+                                    <td>+923335586757</td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button
+                                                class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
+                                                data-target="#edit"><span
+                                                    class="glyphicon glyphicon-pencil"></span></button></p>
+                                    </td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><button
+                                                class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
+                                                data-target="#delete"><span
+                                                    class="glyphicon glyphicon-trash"></span></button></p>
                                     </td>
                                 </tr>
 
@@ -322,26 +407,20 @@
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-footer-widget mb-80">
                             <div class="row">
-                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-3.png"
-                                        alt=""></span>
-                                <span class="col-9" data-img-url="img/img-core/icon-3.png">Whatsapp<br> (19)
-                                    99593-7087</span>
+                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-3.png" alt=""></span>
+                                <span class="col-9" data-img-url="img/img-core/icon-3.png">Whatsapp<br> (19) 99593-7087</span>
                             </div>
                             <div class="row">
-                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-2.png"
-                                        alt=""></span>
-                                <span class="col-9" data-img-url="img/img-core/icon-3.png">Telefone<br> (19)
-                                    99593-7087</span>
+                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-2.png" alt=""></span>
+                                <span class="col-9" data-img-url="img/img-core/icon-3.png">Telefone<br> (19) 99593-7087</span>
                             </div>
                             <div class="row">
-                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-4.png"
-                                        alt=""></span>
-                                <span class="col-9"
-                                    data-img-url="img/img-core/icon-3.png">E-mail<br>ma.santos@nuasp.org.br</span>
+                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-4.png" alt=""></span>
+                                <span class="col-9" data-img-url="img/img-core/icon-3.png">E-mail<br>ma.santos@nuasp.org.br</span>
                             </div>
                         </div>
                     </div>
-
+                    
                     <!-- Single Footer Widget Area -->
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-footer-widget mb-80">
@@ -351,13 +430,13 @@
                                     src="img/core-img/LogoCompleta/Ativo 3.png" alt=""></a>
                         </div>
                     </div>
-
+                   
                     <!-- Single Footer Widget Area -->
                     <div class="col-12 col-sm-4 col-lg-2">
                         <div class="single-footer-widget mb-80">
                             <!-- Widget Title -->
                             <h5 class="widget-title">Links</h5>
-
+    
                             <!-- Footer Nav -->
                             <ul class="footer-nav">
                                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Sobre Nós</a></li>
@@ -369,7 +448,7 @@
                 </div>
             </div>
         </div>
-
+    
         <!-- Copywrite Area -->
         <div class="container">
             <div class="copywrite-content">
@@ -409,8 +488,6 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-<!-- Footer Area End -->
-
     <!-- **** All JS Files ***** -->
     <!-- jQuery 2.2.4 -->
     <script src="js/jquery.min.js"></script>
@@ -423,9 +500,7 @@
     <!-- Active -->
     <script src="js/default-assets/active.js"></script>
     <!-- Chat -->
-    <script src="//code-sa1.jivosite.com/widget/dyTFLPdSAj" async></script>
-
-
+    <script src="//code-sa1.jivosite.com/widget/mu3gyOPnYJ" async></script>
 </body>
 
 </html>

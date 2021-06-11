@@ -84,10 +84,10 @@
                                 <ul id="nav">
                                     <li><a href="#">Administração</a>
                                         <ul class="dropdown">
-                                            <li><a href="./CadastroAluno.php">- Cadastrar aluno</a></li>
-                                            <li><a href="./CadastroDivida.php">- Cadastrar Divída</a></li>
-                                            <li><a href="./CadastroFuncionario.php">- Cadastrar Func...</a></li>
-                                            <li><a data-toggle="modal" data-target="#modalCadastroInst" href="#">- Cadastrar inst...</a></li>
+                                            <li><a href="./listagemAlunos.php">- Alunos</a></li>
+                                            <li><a href="./listagemDividas.php">- Divídas</a></li>
+                                            <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
+                                            <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">

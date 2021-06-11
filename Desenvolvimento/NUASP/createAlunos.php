@@ -1,8 +1,100 @@
+<?php
+    // Include config file
+    require_once "config.php";
+    
+    // Define variables and initialize with empty values
+    $nome = $cpf = $telefone = $email = $dataNascimento = $senha = "";
+    $nome_err = $cpf_err = $telefone_err = $email_err = $dataNascimento_err = $senha_err = "";
+    
+    // Processing form data when form is submitted
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+        // Validações
+        $input_nome = trim($_POST["nome"]);
+        if(empty($input_nome)){
+            $nome_err = "Por favor, insira seu nome.";
+        } elseif(!filter_var($input_nome, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+            $nome_err = "Por favor, insira um nome válido.";
+        } else{
+            $nome = $input_nome;
+        }
+        
+        $input_cpf = trim($_POST["cpf"]);
+        if(empty($input_cpf)){
+            $cpf_err = "Por favor, insira seu CPF.";     
+        } else{
+            $cpf = $input_cpf;
+        }
+
+        $input_cpf = trim($_POST["telefone"]);
+        if(empty($input_cpf)){
+            $telefone_err = "Por favor, insira seu Telefone.";     
+        } else{
+            $telefone = $input_cpf;
+        }
+
+        $input_email = trim($_POST["email"]);
+        if(empty($input_email)){
+            $email_err = "Por favor, insira seu Email.";     
+        } else{
+            $email = $input_email;
+        }
+
+        $input_dataNascimento = trim($_POST["dataNascimento"]);
+        if(empty($input_dataNascimento)){
+            $dataNascimento_err = "Por favor, insira sua Data de Nascimento.";     
+        } else{
+            $dataNascimento = $input_dataNascimento;
+        }
+
+        $input_senha = trim($_POST["senha"]);
+        if(empty($input_senha)){
+            $senha_err = "Por favor, insira sua Senha.";     
+        } else{
+            $senha = $input_senha;
+        }
+        
+        // Check input errors before inserting in database
+        if(empty($nome_err) && empty($cpf_err) && empty($telefone_err) && empty($email_err) && empty($dataNascimento_err) && empty($senha_err)){
+            // Prepare an insert statement
+            $sql = "INSERT INTO Aluno (nome, cpf, telefone, email, dataNascimento, senha) VALUES (?, ?, ?, ?, ?, ?);";
+            
+            if($stmt = mysqli_prepare($link, $sql)){
+                // Bind variables to the prepared statement as parameters
+                mysqli_stmt_bind_param($stmt, "ssssss", $param_nome, $param_cpf, $param_telefone, $param_email, $param_dataNascimento, $param_senha);
+                
+                // Set parameters
+                $param_nome = $nome;
+                $param_cpf = $cpf;
+                $param_telefone = $telefone;
+                $param_email = $email;
+                $param_dataNascimento = date($dataNascimento);
+                $param_senha = password_hash($senha, PASSWORD_DEFAULT);
+                
+                // Attempt to execute the prepared statement
+                if(mysqli_stmt_execute($stmt)){
+                    // Records created successfully. Redirect to landing page
+                    header("location: listagemAlunosTeste.php");
+                    exit();
+                } else{
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+            }
+            
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+        
+        // Close connection
+        mysqli_close($link);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,9 +109,35 @@
     <link rel="stylesheet" href="style.css">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    
+
+    <!--Importando Script Jquery-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $("#Header").load("Header.html");
+            $("#Footer").load("Footer.html");
+        });
+
+        function successCadastro() {
+            Swal.fire(
+                'Cadastro',
+                'realizado com sucesso',
+                'success'
+            )
+        };
+    </script>
+
+    <?php
+    if (isset($_GET["response"])) {
+        if ($_GET["response"] == "Sucesso") {
+            //echo "<script>successCadastro();</script>";
+            echo "<script>alert('Sucesso');</script>";
+        }
+    }
+    ?>
 </head>
 
 <body>
@@ -88,82 +206,19 @@
     </header>
     <!-- Fim da Header -->
 
-    <!-- Inicio Modal de Login -->
-    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Acesso ao sistema</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
-                        <input type="email" id="defaultForm-email" class="form-control validate">
-                        <label for="defaultForm-email">E-mail</label>
-                    </div>
-
-                    <div class="md-form mb-4">
-                        <input type="password" id="defaultForm-pass" class="form-control validate">
-                        <label for="defaultForm-pass">Senha</label>
-                    </div>
-
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn roberto-btn btn-3">Entrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Fim Modal de Login -->
-
-    <!-- Inicio Modal de Cadastro de Instituição -->
-    <div class="modal fade" id="modalCadastroInst" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Cadastrar instituição</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body mx-3">
-                    <section class="get-in-touch">
-                        <form role="form" action="php/nuasp/instituicao/create.php" method="post">
-                            <div class="row">
-                                <div class="form-group col-12">
-                                    <input id="nomeInst" type="text" class="form-control validate" placeholder="Nome">
-                                </div>
-                                <div class="form-group col-12">
-                                    <input id="cnpjInst" type="text" class="form-control validate" placeholder="cnpj">
-                                </div>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-                                <button class="btn roberto-btn btn-3">Entrar</button>
-                            </div>
-                        </form>
-                    </section>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- Fim Modal de Cadastro de Instituição -->
-
 
     <!-- Breadcrumb Area Start -->
-    <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/16.jpg);">
+    <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/4.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Cadastro de Divida</h2>
+                        <h2 class="page-title">Cadastro de Alunos</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
                                 <li class="breadcrumb-item"><a href="index.html">Alunos</a></li>
-                                <li class="breadcrumb-item"><a href="index.html">Financeiro</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Cadastrar Dividas</li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Alunos</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cadastro de Alunos</li>
                             </ol>
                         </nav>
                     </div>
@@ -173,32 +228,50 @@
     </div>
     <!-- Breadcrumb Area End -->
 
-    <!-- Blog Area Start -->
-    <section class="roberto-blog-area section-padding-100-0">
-        <div class="container">
-            <section class="get-in-touch">
-                <form role="form">
-                    <div class="row">
-                        <select name="alunosDevedores" id="alunosDevedores" class="col-md-6 col-sm-12">
-                            <option value="volvo">Aluno1</option>
-                            <option value="saab">Aluno2</option>
-                          </select>
-                          <div class="form-group float-label-control col-md-6 col-sm-12">
-                            <input id="valor" type="text" class="form-control" placeholder="Valor">
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="mt-5">Cadastro de Alunos</h2>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="nome" class="form-control <?php echo (!empty($nome_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $nome; ?>">
+                            <span class="invalid-feedback"><?php echo $nome_err;?></span>
                         </div>
-                        <div class="form-group float-label-control col-md-6 col-sm-12">
-                            <input id="parcelas" type="number" class="form-control" placeholder="Quantidade de Parcelas">
+                        <div class="form-group">
+                            <label>CPF</label>
+                            <input type="text" name="cpf" class="form-control <?php echo (!empty($cpf_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $cpf; ?>">
+                            <span class="invalid-feedback"><?php echo $cpf_err;?></span>
                         </div>
-                        <div class="form-group float-label-control col-md-6 col-sm-12">
-                            <input id="valorTotal" type="text" class="form-control" placeholder="Valor Total">
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <input type="text" name="telefone" class="form-control <?php echo (!empty($telefone_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $telefone; ?>">
+                            <span class="invalid-feedback"><?php echo $telefone_err;?></span>
                         </div>
-                    </div>
-                    <a href="#" class="roberto-btn btn-3" data-animation="fadeInUp" data-delay="800ms">Cadastrar</a>
-                </form><br><br><br><br><br>
-             </section>           
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input type="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
+                            <span class="invalid-feedback"><?php echo $email_err;?></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Data de Nascimento</label>
+                            <input type="date" name="dataNascimento" class="form-control <?php echo (!empty($dataNascimento_err)) ? 'is-invalid' : ''; ?>" value="<?php echo date($dataNascimento); ?>">
+                            <span class="invalid-feedback"><?php echo $dataNascimento_err;?></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input type="password" name="senha" class="form-control <?php echo (!empty($senha_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $senha; ?>">
+                            <span class="invalid-feedback"><?php echo $senha_err;?></span>
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Cadastrar">
+                        <a href="listagemAlunosTeste.php" class="btn btn-secondary ml-2">Cancelar</a>
+                    </form>
+                </div>
+            </div>        
         </div>
-    </section>
-    <!-- Blog Area End -->
+    </div>
+    <br>
 
     <!-- Footer Area Start -->
     <footer class="footer-area section-padding-80-0">
@@ -222,23 +295,22 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Single Footer Widget Area -->
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-footer-widget mb-80">
                             <!-- Footer Logo -->
                             <br>
-                            <a href="#" class="footer-logo"><img style="width: 220px;"
-                                    src="img/core-img/LogoCompleta/Ativo 3.png" alt=""></a>
+                            <a href="#" class="footer-logo"><img style="width: 220px;" src="img/core-img/LogoCompleta/Ativo 3.png" alt=""></a>
                         </div>
                     </div>
-                   
+
                     <!-- Single Footer Widget Area -->
                     <div class="col-12 col-sm-4 col-lg-2">
                         <div class="single-footer-widget mb-80">
                             <!-- Widget Title -->
                             <h5 class="widget-title">Links</h5>
-    
+
                             <!-- Footer Nav -->
                             <ul class="footer-nav">
                                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Sobre Nós</a></li>
@@ -250,13 +322,15 @@
                 </div>
             </div>
         </div>
-    
+
         <!-- Copywrite Area -->
         <div class="container">
             <div class="copywrite-content">
                 <div class="text-center col-12 copywrite-text">
                     <p>Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> Todos os direitos reservados |
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> Todos os direitos reservados |
                         NUASP</a>
                     </p>
                 </div>
@@ -276,8 +350,8 @@
     <script src="js/roberto.bundle.js"></script>
     <!-- Active -->
     <script src="js/default-assets/active.js"></script>
-   <!-- Chat -->
-   <script src="//code-sa1.jivosite.com/widget/mu3gyOPnYJ" async></script>
+    <!-- Chat -->
+    <script src="//code-sa1.jivosite.com/widget/mu3gyOPnYJ" async></script>
 </body>
 
 </html>

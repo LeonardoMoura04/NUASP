@@ -5,7 +5,7 @@ class Database{
     private $host = "localhost";
     private $db_name = "nuasp";
     private $username = "root";
-    private $password = "";
+    private $password = "leonardo";
     public $conn;
   
     // get the database connection

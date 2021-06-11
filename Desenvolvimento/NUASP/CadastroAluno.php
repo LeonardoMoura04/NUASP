@@ -84,10 +84,10 @@
                                 <ul id="nav">
                                     <li><a href="#">Administração</a>
                                         <ul class="dropdown">
-                                            <li><a href="./CadastroAluno.php">- Cadastrar aluno</a></li>
-                                            <li><a href="./CadastroDivida.php">- Cadastrar Divída</a></li>
-                                            <li><a href="./CadastroFuncionario.php">- Cadastrar Func...</a></li>
-                                            <li><a data-toggle="modal" data-target="#modalCadastroInst" href="#">- Cadastrar inst...</a></li>
+                                            <li><a href="./listagemAlunos.php">- Alunos</a></li>
+                                            <li><a href="./listagemDividas.php">- Divídas</a></li>
+                                            <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
+                                            <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">
@@ -187,7 +187,7 @@
                         <h2 class="page-title">Cadastro de Aluno</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Intituição</a></li>
+                                <li class="breadcrumb-item"><a href="index.html">Alunos</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Cadastrar Aluno</li>
                             </ol>
                         </nav>

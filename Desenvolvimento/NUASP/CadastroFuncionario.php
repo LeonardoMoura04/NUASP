@@ -184,11 +184,11 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Cadastro de Aluno</h2>
+                        <h2 class="page-title">Cadastro de Funcionário</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Intituição</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Cadastrar Aluno</li>
+                                <li class="breadcrumb-item"><a href="index.html">Administração</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Cadastrar Func...</li>
                             </ol>
                         </nav>
                     </div>
@@ -202,7 +202,7 @@
     <section class="roberto-blog-area section-padding-100-0">
         <div class="container">
             <section class="get-in-touch">
-                <form role="form" action="php/nuasp/aluno/create.php" method="post">
+                <form role="form" action="php/nuasp/funcionario/create.php" method="post">
                     <div class="row">
                         <div class="form-group float-label-control col-md-6 col-sm-12">
                             <input id="nome" name="nome" type="text" class="form-control" placeholder="Nome">
@@ -220,7 +220,7 @@
                             <input id="cpf" name="cpf" type="text" class="form-control" placeholder="CPF">
                         </div>
                         <div class="form-group float-label-control col-md-3 col-sm-12">
-                            <input id="dataNasc" name="dataNasc" type="date" class="form-control" placeholder="">
+                            <input id="dataNasc" name="dataNasc" type="date" class="form-control">
                         </div>
                         <div class="form-group float-label-control col-md-6 col-sm-12">
                             <input id="email" name="email" type="email" class="form-control" placeholder="E-mail">
@@ -228,12 +228,18 @@
                         <div class="form-group float-label-control col-md-6 col-sm-12">
                             <input id="senha" name="senha" type="password" class="form-control" placeholder="Senha">
                         </div>
+                        <div class="form-group float-label-control col-md-6 col-sm-12">
+                        <select name="instituicaoId" id="instituicaoId" class="col-md-3 col-sm-12">
+                            <option value="1">Escola I</option>
+                          </select>
+                        </div>  
                         <div class="text-center form-group float-label-control col-md-12 col-sm-12">
                           <button class="roberto-btn btn-3" type="submit">Cadastrar</button>
                         </div>
                     </div>
+                    
                     <!-- <a href="#" class="roberto-btn btn-3" data-animation="fadeInUp" data-delay="800ms" type="submit">Cadastrar</a> -->
-                </form><br><br><br><br><br>
+                </form>
              </section>           
         </div>
     </section>

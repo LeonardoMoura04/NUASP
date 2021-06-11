@@ -30,57 +30,127 @@
     </div>
     <!-- /Preloader -->
 
-   <!-- começo da Header -->
-   <header class="header-area">
-    <!-- Search Form -->
-    <!-- Main Header Start -->
-    <div class="main-header-area">
-        <div class="classy-nav-container breakpoint-off">
-            <div class="container">
-                <!-- Classy Menu -->
-                <nav class="classy-navbar justify-content-between" id="robertoNav">
+    <!-- começo da Header -->
+    <header class="header-area">
+        <!-- Search Form -->
+        <!-- Main Header Start -->
+        <div class="main-header-area">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Classy Menu -->
+                    <nav class="classy-navbar justify-content-between" id="robertoNav">
 
-                    <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img style="width: 156px;" src="./img/core-img//LogoCompleta/LogoPadrao.png" alt=""></a>
+                        <!-- Logo -->
+                        <a class="nav-brand" href="index.php"><img style="width: 156px;" src="./img/core-img//LogoCompleta/LogoPadrao.png" alt=""></a>
 
-                    <!-- Navbar Toggler -->
-                    <div class="classy-navbar-toggler">
-                        <span class="navbarToggler"><span></span><span></span><span></span></span>
-                    </div>
-
-                    <!-- Menu -->
-                    <div class="classy-menu">
-                        <!-- Menu Close Button -->
-                        <div class="classycloseIcon">
-                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
                         </div>
-                        <!-- Nav Start -->
-                        <div class="classynav">
-                            <ul id="nav">
-                                <li><a href="#">Vamos Negociar</a>
-                                    <ul class="dropdown">
-                                        <li><a href="https://api.whatsapp.com/send?phone=${encodeURIComponent(5519995937087)}&text=Olá, quero negociar!">- Por Whatsapp</a></li>
-                                        <li><a href="tel:551995937087">- Por Ligação</a></li>
-                                        <li><a href="./ListagemBoletos.html">- 2ª via Boleto</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="./contato.html">Contato</a></li>
-                                <li><a href="./about.html">Sobre</a></li>
-                            </ul>
 
-                            <!-- Book Now -->
-                            <div class="book-now-btn ml-3 ml-lg-5">
-                                <a href="#">Entrar <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                        <!-- Menu -->
+                        <div class="classy-menu">
+                            <!-- Menu Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                             </div>
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul id="nav">
+                                    <li><a href="#">Administração</a>
+                                        <ul class="dropdown">
+                                            <li><a href="./CadastroAluno.php">- Cadastrar aluno</a></li>
+                                            <li><a href="./CadastroDivida.php">- Cadastrar Divída</a></li>
+                                            <li><a href="./CadastroFuncionario.php">- Cadastrar Func...</a></li>
+                                            <li><a data-toggle="modal" data-target="#modalCadastroInst" href="#">- Cadastrar inst...</a></li>
+                                        </ul>
+                                    <li><a href="#">Vamos Negociar</a>
+                                        <ul class="dropdown">
+                                            <li><a href="https://api.whatsapp.com/send?phone=${encodeURIComponent(5519995937087)}&text=Olá, quero negociar!">- Por Whatsapp</a></li>
+                                            <li><a href="tel:551995937087">- Por Ligação</a></li>
+                                            <li><a href="./ListagemBoletos.php">- 2ª via Boleto</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="./contato.php">Contato</a></li>
+                                    <li><a href="./about.php">Sobre</a></li>
+                                </ul>
+
+                                <!-- Book Now -->
+                                <div class="book-now-btn ml-3 ml-lg-5">
+                                    <a data-toggle="modal" data-target="#modalLoginForm" href="#">Entrar <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                            <!-- Nav End -->
                         </div>
-                        <!-- Nav End -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Fim da Header -->
+
+    <!-- Inicio Modal de Login -->
+    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Acesso ao sistema</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                        <input type="email" id="defaultForm-email" class="form-control validate">
+                        <label for="defaultForm-email">E-mail</label>
                     </div>
-                </nav>
+
+                    <div class="md-form mb-4">
+                        <input type="password" id="defaultForm-pass" class="form-control validate">
+                        <label for="defaultForm-pass">Senha</label>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn roberto-btn btn-3">Entrar</button>
+                </div>
             </div>
         </div>
     </div>
-</header>
-<!-- Fim da Header -->
+    <!-- Fim Modal de Login -->
+
+    <!-- Inicio Modal de Cadastro de Instituição -->
+    <div class="modal fade" id="modalCadastroInst" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Cadastrar instituição</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <section class="get-in-touch">
+                        <form role="form" action="php/nuasp/instituicao/create.php" method="post">
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <input id="nomeInst" type="text" class="form-control validate" placeholder="Nome">
+                                </div>
+                                <div class="form-group col-12">
+                                    <input id="cnpjInst" type="text" class="form-control validate" placeholder="cnpj">
+                                </div>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button class="btn roberto-btn btn-3">Entrar</button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Fim Modal de Cadastro de Instituição -->
 
     <!-- Breadcrumb Area Start -->
     <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/16.jpg);">
@@ -109,7 +179,7 @@
 
 
                 <div class="col-md-12">
-                    <h4>Bootstrap Snipp for Datatable</h4>
+                    <h4>Boletos</h4>
                     <div class="table-responsive">
 
 
@@ -123,9 +193,7 @@
                                 <th>Address</th>
                                 <th>Email</th>
                                 <th>Contact</th>
-                                <th>Edit</th>
-
-                                <th>Delete</th>
+                                <th></th>
                             </thead>
                             <tbody>
 
@@ -137,16 +205,8 @@
                                     <td>isometric.mohsin@gmail.com</td>
                                     <td>+923335586757</td>
                                     <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button
-                                                class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
-                                                data-target="#edit"><span
-                                                    class="glyphicon glyphicon-pencil"></span></button></p>
-                                    </td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><button
-                                                class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
-                                                data-target="#delete"><span
-                                                    class="glyphicon glyphicon-trash"></span></button></p>
+                                        <p data-placement="top" data-toggle="tooltip" title="Pagar">
+                                            <h4>Pago</h3>
                                     </td>
                                 </tr>
 
@@ -158,83 +218,8 @@
                                     <td>isometric.mohsin@gmail.com</td>
                                     <td>+923335586757</td>
                                     <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button
-                                                class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
-                                                data-target="#edit"><span
-                                                    class="glyphicon glyphicon-pencil"></span></button></p>
-                                    </td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><button
-                                                class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
-                                                data-target="#delete"><span
-                                                    class="glyphicon glyphicon-trash"></span></button></p>
-                                    </td>
-                                </tr>
-
-
-                                <tr>
-                                    <td><input type="checkbox" class="checkthis" /></td>
-                                    <td>Mohsin</td>
-                                    <td>Irshad</td>
-                                    <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-                                    <td>isometric.mohsin@gmail.com</td>
-                                    <td>+923335586757</td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button
-                                                class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
-                                                data-target="#edit"><span
-                                                    class="glyphicon glyphicon-pencil"></span></button></p>
-                                    </td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><button
-                                                class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
-                                                data-target="#delete"><span
-                                                    class="glyphicon glyphicon-trash"></span></button></p>
-                                    </td>
-                                </tr>
-
-
-
-                                <tr>
-                                    <td><input type="checkbox" class="checkthis" /></td>
-                                    <td>Mohsin</td>
-                                    <td>Irshad</td>
-                                    <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-                                    <td>isometric.mohsin@gmail.com</td>
-                                    <td>+923335586757</td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button
-                                                class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
-                                                data-target="#edit"><span
-                                                    class="glyphicon glyphicon-pencil"></span></button></p>
-                                    </td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><button
-                                                class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
-                                                data-target="#delete"><span
-                                                    class="glyphicon glyphicon-trash"></span></button></p>
-                                    </td>
-                                </tr>
-
-
-                                <tr>
-                                    <td><input type="checkbox" class="checkthis" /></td>
-                                    <td>Mohsin</td>
-                                    <td>Irshad</td>
-                                    <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-                                    <td>isometric.mohsin@gmail.com</td>
-                                    <td>+923335586757</td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button
-                                                class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
-                                                data-target="#edit"><span
-                                                    class="glyphicon glyphicon-pencil"></span></button></p>
-                                    </td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><button
-                                                class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
-                                                data-target="#delete"><span
-                                                    class="glyphicon glyphicon-trash"></span></button></p>
+                                        <p data-placement="top" data-toggle="tooltip" title="Pagar">
+                                            <button type="button" class="btn btn-light">Imprimir</button>
                                     </td>
                                 </tr>
 
@@ -337,20 +322,26 @@
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-footer-widget mb-80">
                             <div class="row">
-                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-3.png" alt=""></span>
-                                <span class="col-9" data-img-url="img/img-core/icon-3.png">Whatsapp<br> (19) 99593-7087</span>
+                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-3.png"
+                                        alt=""></span>
+                                <span class="col-9" data-img-url="img/img-core/icon-3.png">Whatsapp<br> (19)
+                                    99593-7087</span>
                             </div>
                             <div class="row">
-                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-2.png" alt=""></span>
-                                <span class="col-9" data-img-url="img/img-core/icon-3.png">Telefone<br> (19) 99593-7087</span>
+                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-2.png"
+                                        alt=""></span>
+                                <span class="col-9" data-img-url="img/img-core/icon-3.png">Telefone<br> (19)
+                                    99593-7087</span>
                             </div>
                             <div class="row">
-                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-4.png" alt=""></span>
-                                <span class="col-9" data-img-url="img/img-core/icon-3.png">E-mail<br>ma.santos@nuasp.org.br</span>
+                                <span style="width: 10%;" class="col-3"><img src="img/core-img/icon-4.png"
+                                        alt=""></span>
+                                <span class="col-9"
+                                    data-img-url="img/img-core/icon-3.png">E-mail<br>ma.santos@nuasp.org.br</span>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Single Footer Widget Area -->
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-footer-widget mb-80">
@@ -360,13 +351,13 @@
                                     src="img/core-img/LogoCompleta/Ativo 3.png" alt=""></a>
                         </div>
                     </div>
-                   
+
                     <!-- Single Footer Widget Area -->
                     <div class="col-12 col-sm-4 col-lg-2">
                         <div class="single-footer-widget mb-80">
                             <!-- Widget Title -->
                             <h5 class="widget-title">Links</h5>
-    
+
                             <!-- Footer Nav -->
                             <ul class="footer-nav">
                                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Sobre Nós</a></li>
@@ -378,7 +369,7 @@
                 </div>
             </div>
         </div>
-    
+
         <!-- Copywrite Area -->
         <div class="container">
             <div class="copywrite-content">
@@ -418,6 +409,8 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+<!-- Footer Area End -->
+
     <!-- **** All JS Files ***** -->
     <!-- jQuery 2.2.4 -->
     <script src="js/jquery.min.js"></script>
@@ -430,7 +423,9 @@
     <!-- Active -->
     <script src="js/default-assets/active.js"></script>
     <!-- Chat -->
-    <script src="//code-sa1.jivosite.com/widget/mu3gyOPnYJ" async></script>
+    <script src="//code-sa1.jivosite.com/widget/dyTFLPdSAj" async></script>
+
+
 </body>
 
 </html>

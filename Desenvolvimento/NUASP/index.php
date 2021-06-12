@@ -59,6 +59,7 @@
                                             <li><a href="./listagemDividas.php">- Divídas</a></li>
                                             <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
                                             <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
+                                            <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">

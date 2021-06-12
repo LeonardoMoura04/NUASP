@@ -33,7 +33,7 @@
             
             if($stmt = mysqli_prepare($link, $sql)){
                 // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param($stmt, "ssssss", $param_nome, $param_cnpj);
+                mysqli_stmt_bind_param($stmt, "ss", $param_nome, $param_cnpj);
                 
                 // Set parameters
                 $param_nome = $nome;
@@ -148,6 +148,7 @@
                                             <li><a href="./listagemDividas.php">- Divídas</a></li>
                                             <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
                                             <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
+                                            <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">
@@ -181,12 +182,12 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Cadastro de Instituicoes</h2>
+                        <h2 class="page-title">Cadastro de Instituições</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Instituicoes</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Listagem de Instituicoes</li>
-                                <li class="breadcrumb-item active" aria-current="page">Cadastro de Instituicoes</li>
+                                <li class="breadcrumb-item"><a href="index.php">Instituições</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Instituições</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cadastro de Instituições</li>
                             </ol>
                         </nav>
                     </div>
@@ -200,10 +201,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5">Cadastro de Instituicoes</h2>
+                    <h2 class="mt-5">Cadastro de Instituições</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Nome</label>
                             <input type="text" name="nome" class="form-control <?php echo (!empty($nome_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $nome; ?>">
                             <span class="invalid-feedback"><?php echo $nome_err;?></span>
                         </div>

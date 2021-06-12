@@ -244,6 +244,7 @@
                                             <li><a href="./listagemDividas.php">- Divídas</a></li>
                                             <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
                                             <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
+                                            <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">
@@ -279,7 +280,7 @@
                         <h2 class="page-title">Atualizar Alunos</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Alunos</a></li>
+                                <li class="breadcrumb-item"><a href="index.php">Alunos</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Listagem de Alunos</li>
                                 <li class="breadcrumb-item active" aria-current="page">Atualizar Alunos</li>
                             </ol>
@@ -299,7 +300,7 @@
                     <p>Por favor, edite os valores para alterar o registro.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                     <div class="form-group">
-                            <label>Name</label>
+                            <label>Nome</label>
                             <input type="text" name="nome" class="form-control <?php echo (!empty($nome_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $nome; ?>">
                             <span class="invalid-feedback"><?php echo $nome_err;?></span>
                         </div>

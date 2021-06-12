@@ -22,15 +22,19 @@
         $input_cpf = trim($_POST["cpf"]);
         if(empty($input_cpf)){
             $cpf_err = "Por favor, insira seu CPF.";     
-        } else{
+        } else if(strlen($input_cpf) > 14){
+            $cpf_err = "O CPF excedeu o limite de caracteres.";
+        }else{
             $cpf = $input_cpf;
         }
 
-        $input_cpf = trim($_POST["telefone"]);
-        if(empty($input_cpf)){
+        $input_telefone = trim($_POST["telefone"]);
+        if(empty($input_telefone)){
             $telefone_err = "Por favor, insira seu Telefone.";     
+        } else if(strlen($input_telefone) > 16){
+            $telefone_err = "O telefone excedeu o limite de caracteres.";
         } else{
-            $telefone = $input_cpf;
+            $telefone = $input_telefone;
         }
 
         $input_email = trim($_POST["email"]);
@@ -180,6 +184,7 @@
                                             <li><a href="./listagemDividas.php">- Divídas</a></li>
                                             <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
                                             <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
+                                            <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">
@@ -213,12 +218,12 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Cadastro de Funcionarios</h2>
+                        <h2 class="page-title">Cadastro de Funcionários</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Funcionarios</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Listagem de Funcionarios</li>
-                                <li class="breadcrumb-item active" aria-current="page">Cadastro de Funcionarios</li>
+                                <li class="breadcrumb-item"><a href="index.php">Funcionários</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Funcionários</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cadastro de Funcionários</li>
                             </ol>
                         </nav>
                     </div>
@@ -232,10 +237,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5">Cadastro de Funcionarios</h2>
+                    <h2 class="mt-5">Cadastro de Funcionários</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Nome</label>
                             <input type="text" name="nome" class="form-control <?php echo (!empty($nome_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $nome; ?>">
                             <span class="invalid-feedback"><?php echo $nome_err;?></span>
                         </div>

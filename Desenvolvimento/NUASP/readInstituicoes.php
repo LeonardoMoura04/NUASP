@@ -139,6 +139,7 @@
                                             <li><a href="./listagemDividas.php">- Divídas</a></li>
                                             <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
                                             <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
+                                            <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">
@@ -171,12 +172,12 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Consultar Instituicoes</h2>
+                        <h2 class="page-title">Consultar Instituições</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Instituicoes</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Listagem de Instituicoes</li>
-                                <li class="breadcrumb-item active" aria-current="page">Consultar Instituicoes</li>
+                                <li class="breadcrumb-item"><a href="index.php">Instituições</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Instituições</li>
+                                <li class="breadcrumb-item active" aria-current="page">Consultar Instituições</li>
                             </ol>
                         </nav>
                     </div>
@@ -190,7 +191,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="mt-5 mb-3">Instituicao: <?php echo $row["nome"]; ?></h1>
+                    <h1 class="mt-5 mb-3">Instituição: <?php echo $row["nome"]; ?></h1>
                     <div class="form-group">
                         <label>Nome</label>
                         <p><b><?php echo $row["nome"]; ?></b></p>

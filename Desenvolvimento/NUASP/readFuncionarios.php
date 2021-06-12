@@ -143,6 +143,7 @@
                                             <li><a href="./listagemDividas.php">- Divídas</a></li>
                                             <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
                                             <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
+                                            <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">
@@ -175,12 +176,12 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Consultar Funcionarios</h2>
+                        <h2 class="page-title">Consultar Funcionários</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Funcionarios</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Listagem de Funcionarios</li>
-                                <li class="breadcrumb-item active" aria-current="page">Consultar Funcionarios</li>
+                                <li class="breadcrumb-item"><a href="index.php">Funcionários</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Funcionários</li>
+                                <li class="breadcrumb-item active" aria-current="page">Consultar Funcionários</li>
                             </ol>
                         </nav>
                     </div>
@@ -194,7 +195,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="mt-5 mb-3">Funcionario: <?php echo $row["nome"]; ?></h1>
+                    <h1 class="mt-5 mb-3">Funcionário: <?php echo $row["nome"]; ?></h1>
                     <div class="form-group">
                         <label>Nome</label>
                         <p><b><?php echo $row["nome"]; ?></b></p>

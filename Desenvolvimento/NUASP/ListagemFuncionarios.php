@@ -88,6 +88,7 @@
                                             <li><a href="./listagemDividas.php">- Divídas</a></li>
                                             <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
                                             <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
+                                            <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">
@@ -120,11 +121,11 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Listagem de Funcionarios</h2>
+                        <h2 class="page-title">Listagem de Funcionários</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Funcionarios</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Listagem de Funcionarios</li>
+                                <li class="breadcrumb-item"><a href="index.php">Funcionários</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Funcionários</li>
                             </ol>
                         </nav>
                     </div>
@@ -139,7 +140,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left">Funcionarios</h2>
+                        <h2 class="pull-left">Funcionários</h2>
                         <a href="createFuncionarios.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Adicionar Funcionario</a>
                     </div>
                     <?php
@@ -172,8 +173,8 @@
                                             echo "<td>" . $row['cpf'] . "</td>";
                                             echo "<td>" . $row['telefone'] . "</td>";
                                             echo "<td>" . $row['email'] . "</td>";
-                                            echo "<td>" . $row['dataNascimento'] . "</td>";
-                                            echo "<td>" . $row['isAtivo'] . "</td>";
+                                            echo "<td>" . date("d/m/Y", strtotime($row["dataNascimento"])) . "</td>";
+                                            echo "<td>" . ($row['isAtivo'] == 1 ? 'Ativo' : 'Inativo') . "</td>";
                                             echo "<td>";
                                                 echo '<a href="readFuncionarios.php?id='. $row['id'] .'" class="mr-3" title="Consultar Registro" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                                 echo '<a href="updateFuncionarios.php?id='. $row['id'] .'" class="mr-3" title="Atualizar Registro" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';

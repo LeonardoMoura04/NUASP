@@ -34,13 +34,13 @@
             $sql = "UPDATE Instituicao
                     SET 
                         nome = ?, 
-                        cnpj = ?, 
+                        cnpj = ?
                     WHERE
-                        id = ?";
+                        id = ?;";
             
             if($stmt = mysqli_prepare($link, $sql)){
                 // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param($stmt, "ssssssi", $param_nome, $param_cnpj, $param_id);
+                mysqli_stmt_bind_param($stmt, "ssi", $param_nome, $param_cnpj, $param_id);
                 
                 // Set parameters
                 $param_nome = $nome;
@@ -55,10 +55,10 @@
                 } else{
                     echo "Oops! Something went wrong. Please try again later.";
                 }
+
+                // Close statement
+                mysqli_stmt_close($stmt);
             }
-            
-            // Close statement
-            mysqli_stmt_close($stmt);
         }
         
         // Close connection
@@ -204,6 +204,7 @@
                                             <li><a href="./listagemDividas.php">- Divídas</a></li>
                                             <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
                                             <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
+                                            <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">
@@ -236,12 +237,12 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Atualizar Instituicoes</h2>
+                        <h2 class="page-title">Atualizar Instituições</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Instituicoes</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Listagem de Instituicoes</li>
-                                <li class="breadcrumb-item active" aria-current="page">Atualizar Instituicoes</li>
+                                <li class="breadcrumb-item"><a href="index.php">Instituições</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Instituições</li>
+                                <li class="breadcrumb-item active" aria-current="page">Atualizar Instituições</li>
                             </ol>
                         </nav>
                     </div>
@@ -255,11 +256,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5">Atualizar Instituicao</h2>
+                    <h2 class="mt-5">Atualizar Instituição</h2>
                     <p>Por favor, edite os valores para alterar o registro.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                     <div class="form-group">
-                            <label>Name</label>
+                            <label>Nome</label>
                             <input type="text" name="nome" class="form-control <?php echo (!empty($nome_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $nome; ?>">
                             <span class="invalid-feedback"><?php echo $nome_err;?></span>
                         </div>

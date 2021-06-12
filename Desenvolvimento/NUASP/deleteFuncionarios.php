@@ -129,6 +129,7 @@
                                             <li><a href="./listagemDividas.php">- Divídas</a></li>
                                             <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
                                             <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
+                                            <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">
@@ -162,12 +163,12 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Deletar Funcionario</h2>
+                        <h2 class="page-title">Deletar Funcionário</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Funcionarios</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Listagem de Funcionarios</li>
-                                <li class="breadcrumb-item active" aria-current="page">Deletar Funcionario</li>
+                                <li class="breadcrumb-item"><a href="index.php">Funcionários</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Funcionários</li>
+                                <li class="breadcrumb-item active" aria-current="page">Deletar Funcionário</li>
                             </ol>
                         </nav>
                     </div>
@@ -181,14 +182,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5 mb-3">Deletar Funcionario</h2>
+                    <h2 class="mt-5 mb-3">Deletar Funcionário</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="alert alert-danger">
                             <input type="hidden" name="id" value="<?php echo trim($_GET["id"]); ?>"/>
                             <p>Tem certeza que gostaria de deletar este registro?</p>
                             <p>
-                                <input type="submit" value="Yes" class="btn btn-danger">
-                                <a href="listagemFuncionarios.php" class="btn btn-secondary">No</a>
+                                <input type="submit" value="Sim" class="btn btn-danger">
+                                <a href="listagemFuncionarios.php" class="btn btn-secondary">Não</a>
                             </p>
                         </div>
                     </form>

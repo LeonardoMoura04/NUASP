@@ -88,6 +88,7 @@
                                             <li><a href="./listagemDividas.php">- Divídas</a></li>
                                             <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
                                             <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
+                                            <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">
@@ -120,11 +121,11 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Listagem de Instituicoes</h2>
+                        <h2 class="page-title">Listagem de Instituições</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Instituicoes</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Listagem de Instituicoes</li>
+                                <li class="breadcrumb-item"><a href="index.php">Instituições</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Instituições</li>
                             </ol>
                         </nav>
                     </div>
@@ -139,8 +140,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left">Instituicoes</h2>
-                        <a href="createInstituicoes.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Adicionar Instituicao</a>
+                        <h2 class="pull-left">Instituições</h2>
+                        <a href="createInstituicoes.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Adicionar Instituição</a>
                     </div>
                     <?php
 

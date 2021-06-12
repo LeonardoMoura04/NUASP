@@ -129,6 +129,7 @@
                                             <li><a href="./listagemDividas.php">- Divídas</a></li>
                                             <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
                                             <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
+                                            <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
                                         </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">
@@ -165,7 +166,7 @@
                         <h2 class="page-title">Deletar Dividas</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Dividas</a></li>
+                                <li class="breadcrumb-item"><a href="index.php">Dividas</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Listagem de Dividas</li>
                                 <li class="breadcrumb-item active" aria-current="page">Deletar Divida</li>
                             </ol>

@@ -28,8 +28,8 @@
                     $cpf = $row["cpf"];
                     $telefone = $row["telefone"];
                     $email = $row["email"];
-                    $dataNascimento = $row["dataNascimento"];
-                    $isAtivo = $row["isAtivo"];
+                    $dataNascimento = date("d/m/Y", strtotime($row["dataNascimento"]));
+                    $isAtivo = $row["isAtivo"] == 1 ? "Ativo" : "Inativo";
                 } else{
                     // URL doesn't contain valid id parameter. Redirect to error page
                     header("location: error.php");
@@ -157,7 +157,7 @@
 
                                 <!-- Book Now -->
                                 <div class="book-now-btn ml-3 ml-lg-5">
-                                    <a href="#">Sair</a>
+                                    <a data-toggle="modal" data-target="#modalLoginForm" href="#">Entrar <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -194,36 +194,37 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="mt-5 mb-3">Aluno: <?php echo $row["nome"]; ?></h1>
+                    <h1 class="mt-5 mb-3">Aluno: <?php echo $nome; ?></h1>
                     <div class="form-group">
                         <label>Nome</label>
-                        <p><b><?php echo $row["nome"]; ?></b></p>
+                        <p><b><?php echo $nome; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>CPF</label>
-                        <p><b><?php echo $row["cpf"]; ?></b></p>
+                        <p><b><?php echo $cpf; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>Telefone</label>
-                        <p><b><?php echo $row["telefone"]; ?></b></p>
+                        <p><b><?php echo $telefone; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>E-mail</label>
-                        <p><b><?php echo $row["email"]; ?></b></p>
+                        <p><b><?php echo $email; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>Data de Nascimento</label>
-                        <p><b><?php echo $row["dataNascimento"]; ?></b></p>
+                        <p><b><?php echo $dataNascimento; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>Ativo / Inativo</label>
-                        <p><b><?php echo $row["isAtivo"] == 1 ? "Ativo" : "Inativo"; ?></b></p>
+                        <p><b><?php echo $isAtivo; ?></b></p>
                     </div>
-                    <p><a href="listagemAlunosTeste.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="listagemAlunos.php" class="btn btn-primary">Voltar</a></p>
                 </div>
             </div>        
         </div>
     </div>
+    <br>
 
     <!-- Footer Area Start -->
     <footer class="footer-area section-padding-80-0">

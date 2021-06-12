@@ -1,11 +1,13 @@
 <?php
     // Process delete operation after confirmation
-    if(isset($_POST["id"]) && !empty($_POST["id"])){
+    if (isset($_POST["id"]) && !empty($_POST["id"])){
         // Include config file
         require_once "config.php";
         
         // Prepare a delete statement
         $sql = "DELETE FROM Aluno WHERE id = ?";
+
+        $id = trim($_POST["id"]);
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -17,7 +19,7 @@
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Records deleted successfully. Redirect to landing page
-                header("location: listagemAlunosTeste.php");
+                header("location: listagemAlunos.php");
                 exit();
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -29,7 +31,7 @@
         
         // Close connection
         mysqli_close($link);
-    } else{
+    }else{
         // Check existence of id parameter
         if(empty(trim($_GET["id"]))){
             // URL doesn't contain id parameter. Redirect to error page
@@ -143,7 +145,7 @@
 
                                 <!-- Book Now -->
                                 <div class="book-now-btn ml-3 ml-lg-5">
-                                <a href="#">Sair</a>
+                                    <a data-toggle="modal" data-target="#modalLoginForm" href="#">Entrar <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -187,15 +189,16 @@
                             <input type="hidden" name="id" value="<?php echo trim($_GET["id"]); ?>"/>
                             <p>Tem certeza que gostaria de deletar este registro?</p>
                             <p>
-                                <input type="submit" value="Yes" class="btn btn-danger">
-                                <a href="listagemAlunosTeste.php" class="btn btn-secondary">No</a>
+                                <input type="submit" value="Sim" class="btn btn-danger">
+                                <a href="listagemAlunos.php" class="btn btn-secondary">Não</a>
                             </p>
                         </div>
                     </form>
                 </div>
-            </div>        
+            </div>
         </div>
     </div>
+    <br>
 
     <!-- Footer Area Start -->
     <footer class="footer-area section-padding-80-0">

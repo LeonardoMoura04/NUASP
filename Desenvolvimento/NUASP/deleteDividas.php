@@ -1,3 +1,44 @@
+<?php
+    // Process delete operation after confirmation
+    if(isset($_POST["id"]) && !empty($_POST["id"])){
+        // Include config file
+        require_once "config.php";
+        
+        // Prepare a delete statement
+        $sql = "DELETE FROM Parcelas WHERE dividasId = ?; DELETE FROM Divida WHERE id = ?;";
+        
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "i", $param_id);
+            
+            // Set parameters
+            $param_id = trim($_POST["id"]);
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Records deleted successfully. Redirect to landing page
+                header("location: listagemDividas.php");
+                exit();
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+        
+        // Close statement
+        mysqli_stmt_close($stmt);
+        
+        // Close connection
+        mysqli_close($link);
+    } else{
+        // Check existence of id parameter
+        if(empty(trim($_GET["id"]))){
+            // URL doesn't contain id parameter. Redirect to error page
+            header("location: error.php");
+            exit();
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -114,16 +155,19 @@
     </header>
     <!-- Fim da Header -->
 
+
     <!-- Breadcrumb Area Start -->
     <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/4.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Erro</h2>
+                        <h2 class="page-title">Deletar Dividas</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Erro</a></li>
+                                <li class="breadcrumb-item"><a href="index.html">Dividas</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Dividas</li>
+                                <li class="breadcrumb-item active" aria-current="page">Deletar Divida</li>
                             </ol>
                         </nav>
                     </div>
@@ -137,8 +181,17 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5 mb-3">Operação Inválida</h2>
-                    <div class="alert alert-danger">Desculpe, você fez uma operação inválida. Por favor <a href="index.php" class="alert-link">volte</a> e tente novamente.</div>
+                    <h2 class="mt-5 mb-3">Deletar Divida</h2>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                        <div class="alert alert-danger">
+                            <input type="hidden" name="id" value="<?php echo trim($_GET["id"]); ?>"/>
+                            <p>Tem certeza que gostaria de deletar este registro? Irá deletar todas as parcelas relacionadas à esta dívida também.</p>
+                            <p>
+                                <input type="submit" value="Sim" class="btn btn-danger">
+                                <a href="listagemDividas.php" class="btn btn-secondary">Não</a>
+                            </p>
+                        </div>
+                    </form>
                 </div>
             </div>        
         </div>

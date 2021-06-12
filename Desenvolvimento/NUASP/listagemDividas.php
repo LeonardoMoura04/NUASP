@@ -120,10 +120,11 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Erro</h2>
+                        <h2 class="page-title">Listagem de Dívidas</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Erro</a></li>
+                                <li class="breadcrumb-item"><a href="index.html">Dívidas</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Dívidas</li>
                             </ol>
                         </nav>
                     </div>
@@ -137,8 +138,70 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5 mb-3">Operação Inválida</h2>
-                    <div class="alert alert-danger">Desculpe, você fez uma operação inválida. Por favor <a href="index.php" class="alert-link">volte</a> e tente novamente.</div>
+                    <div class="mt-5 mb-3 clearfix">
+                        <h2 class="pull-left">Dívidas</h2>
+                        <a href="createDividas.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Adicionar Dívida</a>
+                    </div>
+                    <?php
+
+                        // Include config file
+                        require_once "config.php";
+                        
+                        // Attempt select query execution
+                        $sql = "SELECT d.id AS dividaId, a.nome AS alunoNome, i.nome AS instituicaoNome, tp.nome AS tipoPagamentoNome, d.* FROM Divida d
+                                INNER JOIN Aluno a ON a.id = d.alunoId
+                                INNER JOIN Instituicao i ON i.id = d.instituicaoId
+                                INNER JOIN TipoPagamento tp ON tp.id = d.tipoPagamentoId";
+                        if($result = mysqli_query($link, $sql)){
+                            if(mysqli_num_rows($result) > 0){
+                                echo '<table class="table table-bordered table-striped">';
+                                    echo "<thead>";
+                                        echo "<tr>";
+                                            echo "<th>#</th>";
+                                            echo "<th>Número de Parcelas</th>";
+                                            echo "<th>Valor Total</th>";
+                                            echo "<th>Paga?</th>";
+                                            echo "<th>Aluno</th>";
+                                            echo "<th>Instituição</th>";
+                                            echo "<th>Tipo de Pagamento</th>";
+                                            echo "<th>Ações Dívidas</th>";
+                                            echo "<th>Ações Parcelas</th>";
+                                        echo "</tr>";
+                                    echo "</thead>";
+                                    echo "<tbody>";
+                                    while($row = mysqli_fetch_array($result)){
+                                        echo "<tr>";
+                                            echo "<td>" . $row['dividaId'] . "</td>";
+                                            echo "<td>" . $row['numeroParcelas'] . "</td>";
+                                            echo "<td> R$ " . $row['valorTotal'] . "</td>";
+                                            echo "<td>" . ($row['isPaga'] == 1 ? 'Sim' : 'Não') . "</td>";
+                                            echo "<td>" . $row['alunoId'] . " - " . $row['alunoNome'] . "</td>";
+                                            echo "<td>" . $row['instituicaoId'] . " - " . $row['instituicaoNome'] . "</td>";
+                                            echo "<td>" . $row['tipoPagamentoNome'] . "</td>";
+                                            echo "<td>";
+                                                echo '<a href="readDividas.php?id='. $row['dividaId'] .'" class="mr-3" title="Consultar Registro" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                                echo '<a href="updateDividas.php?id='. $row['dividaId'] .'" class="mr-3" title="Atualizar Registro" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                                echo '<a href="deleteDividas.php?id='. $row['dividaId'] .'" title="Deletar Registro" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                            echo "</td>";
+                                            echo "<td>";
+                                                echo '<a href="listagemParcelas.php?id='. $row['dividaId'] .'" class="mr-3" title="Consultar Registro" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';                                            
+                                            echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                    echo "</tbody>";
+                                echo "</table>";
+                                // Free result set
+                                mysqli_free_result($result);
+                            } else{
+                                echo '<div class="alert alert-danger"><em>Registros não encontrados.</em></div>';
+                            }
+                        } else{
+                            echo "Oops! Something went wrong. Please try again later.";
+                        }
+    
+                        // Close connection
+                        mysqli_close($link);
+                    ?>
                 </div>
             </div>        
         </div>

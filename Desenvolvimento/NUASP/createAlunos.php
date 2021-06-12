@@ -21,35 +21,35 @@
         
         $input_cpf = trim($_POST["cpf"]);
         if(empty($input_cpf)){
-            $cpf_err = "Por favor, insira seu CPF.";     
+            $cpf_err = "Por favor, insira seu CPF.";
         } else{
             $cpf = $input_cpf;
         }
 
-        $input_cpf = trim($_POST["telefone"]);
-        if(empty($input_cpf)){
-            $telefone_err = "Por favor, insira seu Telefone.";     
+        $input_telefone = trim($_POST["telefone"]);
+        if(empty($input_telefone)){
+            $telefone_err = "Por favor, insira seu Telefone.";
         } else{
-            $telefone = $input_cpf;
+            $telefone = $input_telefone;
         }
 
         $input_email = trim($_POST["email"]);
         if(empty($input_email)){
-            $email_err = "Por favor, insira seu Email.";     
+            $email_err = "Por favor, insira seu Email.";
         } else{
             $email = $input_email;
         }
 
         $input_dataNascimento = trim($_POST["dataNascimento"]);
         if(empty($input_dataNascimento)){
-            $dataNascimento_err = "Por favor, insira sua Data de Nascimento.";     
+            $dataNascimento_err = "Por favor, insira sua Data de Nascimento.";
         } else{
             $dataNascimento = $input_dataNascimento;
         }
 
         $input_senha = trim($_POST["senha"]);
         if(empty($input_senha)){
-            $senha_err = "Por favor, insira sua Senha.";     
+            $senha_err = "Por favor, insira sua Senha.";
         } else{
             $senha = $input_senha;
         }
@@ -74,7 +74,7 @@
                 // Attempt to execute the prepared statement
                 if(mysqli_stmt_execute($stmt)){
                     // Records created successfully. Redirect to landing page
-                    header("location: listagemAlunosTeste.php");
+                    header("location: listagemAlunos.php");
                     exit();
                 } else{
                     echo "Oops! Something went wrong. Please try again later.";
@@ -194,7 +194,7 @@
 
                                 <!-- Book Now -->
                                 <div class="book-now-btn ml-3 ml-lg-5">
-                                <a href="#">Sair</a>
+                                    <a data-toggle="modal" data-target="#modalLoginForm" href="#">Entrar <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -265,7 +265,7 @@
                             <span class="invalid-feedback"><?php echo $senha_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Cadastrar">
-                        <a href="listagemAlunosTeste.php" class="btn btn-secondary ml-2">Cancelar</a>
+                        <a href="listagemAlunos.php" class="btn btn-secondary ml-2">Cancelar</a>
                     </form>
                 </div>
             </div>        

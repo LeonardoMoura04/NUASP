@@ -102,7 +102,7 @@
 
                                 <!-- Book Now -->
                                 <div class="book-now-btn ml-3 ml-lg-5">
-                                <a href="#">Sair</a>
+                                    <a data-toggle="modal" data-target="#modalLoginForm" href="#">Entrar <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -156,7 +156,7 @@
                                         echo "<tr>";
                                             echo "<th>#</th>";
                                             echo "<th>Nome</th>";
-                                            echo "<th>Cpf</th>";
+                                            echo "<th>CPF</th>";
                                             echo "<th>Telefone</th>";
                                             echo "<th>Email</th>";
                                             echo "<th>Data de Nascimento</th>";
@@ -172,8 +172,8 @@
                                             echo "<td>" . $row['cpf'] . "</td>";
                                             echo "<td>" . $row['telefone'] . "</td>";
                                             echo "<td>" . $row['email'] . "</td>";
-                                            echo "<td>" . $row['dataNascimento'] . "</td>";
-                                            echo "<td>" . $row['isAtivo'] . "</td>";
+                                            echo "<td>" . date("d/m/Y", strtotime($row["dataNascimento"])) . "</td>";
+                                            echo "<td>" . ($row['isAtivo'] == 1 ? 'Ativo' : 'Inativo') . "</td>";
                                             echo "<td>";
                                                 echo '<a href="readAlunos.php?id='. $row['id'] .'" class="mr-3" title="Consultar Registro" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                                 echo '<a href="updateAlunos.php?id='. $row['id'] .'" class="mr-3" title="Atualizar Registro" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';

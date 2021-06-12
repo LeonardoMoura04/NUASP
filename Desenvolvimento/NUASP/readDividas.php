@@ -1,3 +1,63 @@
+<?php
+    // Check existence of id parameter before processing further
+    if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
+        // Include config file
+        require_once "config.php";
+        
+        // Prepare a select statement
+        $sql = "SELECT d.id AS dividaId, a.nome AS alunoNome, i.nome AS instituicaoNome, tp.nome AS tipoPagamentoNome, d.* FROM Divida d
+                INNER JOIN Aluno a ON a.id = d.alunoId
+                INNER JOIN Instituicao i ON i.id = d.instituicaoId
+                INNER JOIN TipoPagamento tp ON tp.id = d.tipoPagamentoId 
+                WHERE d.id = ?";
+        
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "i", $param_id);
+            
+            // Set parameters
+            $param_id = trim($_GET["id"]);
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                $result = mysqli_stmt_get_result($stmt);
+        
+                if(mysqli_num_rows($result) == 1){
+                    /* Fetch result row as an associative array. Since the result set
+                    contains only one row, we don't need to use while loop */
+                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    
+                    // Retrieve individual field value
+                    $id = $row['dividaId'];
+                    $numeroParcelas = $row['numeroParcelas'];
+                    $valorTotal = 'R$ ' . $row['valorTotal'];
+                    $isPaga = $row['isPaga'] == 1 ? 'Sim' : 'Não';
+                    $alunoId = $row['alunoId'] . ' - ' . $row['alunoNome'];
+                    $instituicaoId = $row['instituicaoId'] . ' - ' . $row['instituicaoNome'];
+                    $tipoPagamentoId = $row['tipoPagamentoNome'];
+                } else{
+                    // URL doesn't contain valid id parameter. Redirect to error page
+                    header("location: error.php");
+                    exit();
+                }
+                
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+        
+        // Close statement
+        mysqli_stmt_close($stmt);
+        
+        // Close connection
+        mysqli_close($link);
+    } else{
+        // URL doesn't contain id parameter. Redirect to error page
+        header("location: error.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -120,10 +180,12 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Erro</h2>
+                        <h2 class="page-title">Consultar Dívidas</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Erro</a></li>
+                                <li class="breadcrumb-item"><a href="index.html">Dívidas</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Listagem de Dívidas</li>
+                                <li class="breadcrumb-item active" aria-current="page">Consultar Dívidas</li>
                             </ol>
                         </nav>
                     </div>
@@ -137,12 +199,37 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5 mb-3">Operação Inválida</h2>
-                    <div class="alert alert-danger">Desculpe, você fez uma operação inválida. Por favor <a href="index.php" class="alert-link">volte</a> e tente novamente.</div>
+                    <h1 class="mt-5 mb-3">Número da Dívida: <?php echo $id; ?></h1>
+                    <div class="form-group">
+                        <label>Número de Parcelas</label>
+                        <p><b><?php echo $numeroParcelas; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Valor Total</label>
+                        <p><b><?php echo $valorTotal; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Paga?</label>
+                        <p><b><?php echo $isPaga; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Aluno</label>
+                        <p><b><?php echo $alunoId; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Instituicao</label>
+                        <p><b><?php echo $instituicaoId; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo de Pagamento</label>
+                        <p><b><?php echo $tipoPagamentoId; ?></b></p>
+                    </div>
+                    <p><a href="listagemDividas.php" class="btn btn-primary">Voltar</a></p>
                 </div>
             </div>        
         </div>
     </div>
+    <br>
 
     <!-- Footer Area Start -->
     <footer class="footer-area section-padding-80-0">

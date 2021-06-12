@@ -45,7 +45,7 @@ CREATE TABLE Divida (
     id INT NOT NULL AUTO_INCREMENT,
     numeroParcelas INT,
     valorTotal INT,
-    isPaga BIT,
+    isPaga BOOLEAN DEFAULT 0,
     alunoId INT,
     instituicaoId INT,
     tipoPagamentoId INT,
@@ -74,12 +74,6 @@ DROP TABLE Instituicao;
 DROP TABLE TipoPagamento;
 
 -- Inserts
-INSERT INTO Instituicao (cnpj, nome) VALUES 
-('123456789456789', 'Escola I'), 
-('789456938520001', 'Escola II'),
-('456789456789451', 'Escola III'),
-('357415896320001', 'Escola IV');
-
 INSERT INTO Instituicao (cnpj, nome) VALUES 
 ('123456789456789', 'Escola I'), 
 ('789456938520001', 'Escola II'),
@@ -147,3 +141,18 @@ INNER JOIN TipoPagamento tp ON tp.id = d.tipoPagamentoId;
 UPDATE Funcionario
 SET isAtivo = 1
 WHERE id = 10;
+
+SELECT d.id AS dividaId, a.nome AS alunoNome, i.nome AS instituicaoNome, tp.nome AS tipoPagamentoNome, d.* FROM Divida d
+INNER JOIN Aluno a ON a.id = d.alunoId
+INNER JOIN Instituicao i ON i.id = d.instituicaoId
+INNER JOIN TipoPagamento tp ON tp.id = d.tipoPagamentoId;
+
+
+
+SELECT a.Id, a.Nome, "Aluno" tipo FROM Aluno a
+UNION
+SELECT i.Id, i.nome, "Instituicao" tipo FROM Instituicao i
+UNION
+SELECT tp.Id, tp.nome, "TipoPagamento" tipo FROM TipoPagamento tp;
+
+CREATE PROCEDURE CriarDivida

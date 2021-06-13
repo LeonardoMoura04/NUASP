@@ -1,3 +1,93 @@
+<?php
+    // Include config file
+    require_once "config.php";
+    
+    // Define variables and initialize with empty values
+    $cpf = $senha = "";
+    $cpf_err = $senha_err = "";
+    
+    // Processing form data when form is submitted
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+        // Validações
+        $input_cpf = trim($_POST["cpf"]);
+        if(empty($input_cpf)){
+            $cpf_err = "Por favor, insira seu CPF.";
+        } else if(strlen($input_cpf) > 14){
+            $cpf_err = "O CPF excedeu o limite de caracteres.";
+        }else{
+            $cpf = $input_cpf;
+        }
+
+        $input_senha = trim($_POST["senha"]);
+        if(empty($input_senha)){
+            $senha_err = "Por favor, insira sua Senha.";
+        } else{
+            $senha = $input_senha;
+        }
+
+        $input_loginTypePerson = trim($_POST["loginTypePerson"]);
+        if(empty($input_loginTypePerson)){
+            $loginTypePerson_err = "Por favor, insira o tipo do login.";
+        } else{
+            $loginTypePerson = $input_loginTypePerson;
+        }
+
+        echo "<script>alert('antes: ' ". $loginTypePerson .")</script>";
+        
+        // Check input errors before inserting in database
+        if(empty($cpf_err) && empty($senha_err) && empty($loginTypePerson_err)){
+            echo "<script>alert('teste')</script>";
+            $sql = "";
+
+            if($loginTypePerson == "aluno"){
+                $sql = "SELECT * FROM Aluno WHERE cpf = ?";
+            } else{
+                $sql = "SELECT * FROM Funcionario WHERE cpf = ?";
+            }
+        
+            if($stmt = mysqli_prepare($link, $sql)){
+
+                mysqli_stmt_bind_param($stmt, "s", $param_cpf);
+                $param_cpf = $cpf;
+                
+                if(mysqli_stmt_execute($stmt)){
+
+                    $result = mysqli_stmt_get_result($stmt);
+
+                    if(mysqli_num_rows($result) == 1){
+                        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                        
+                        $cpfBanco = $row["cpf"];
+                        $senhaBanco = $row["senha"];
+
+                        if(password_verify($senha, $senhaBanco)){
+                            if($loginTypePerson == "aluno"){
+                                header("location: listagemParcelas.php?id=" . $row["id"] . "&type=a");
+                                exit();
+                            } else{
+                                header("location: listagemAlunos.php");
+                            }
+                        }
+                    } else{
+                        header("location: error.php");
+                        exit();
+                    }
+                    
+                } else{
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+            }
+            
+            // Close statement
+            mysqli_stmt_close($stmt);
+            
+            // Close connection
+            mysqli_close($link);
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -97,58 +187,41 @@
                     </button>
                 </div>
                 <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
-                        <input type="email" id="defaultForm-email" class="form-control validate">
-                        <label for="defaultForm-email">E-mail</label>
-                    </div>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                        <div class="md-form mb-5">
+                            <label>CPF</label>
+                            <input type="text" name="cpf" class="form-control <?php echo (!empty($cpf_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $cpf; ?>">
+                            <span class="invalid-feedback"><?php echo $cpf_err;?></span>
+                        </div>
 
-                    <div class="md-form mb-4">
-                        <input type="password" id="defaultForm-pass" class="form-control validate">
-                        <label for="defaultForm-pass">Senha</label>
-                    </div>
+                        <div class="md-form mb-4">
+                            <label>Senha</label>
+                            <input type="password" name="senha" class="form-control <?php echo (!empty($senha_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $senha; ?>">
+                            <span class="invalid-feedback"><?php echo $senha_err;?></span>
+                        </div>
 
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn roberto-btn btn-3">Entrar</button>
+                        <div class="md-form mb-4">
+                            <label style="margin-right: 15px; margin-left: 15px;">Funcionário</label>
+                            <label class="switch">
+                            <input type="checkbox" id="loginTypePerson" name="loginTypePerson" value="funcionario">
+                            <span class="slider round"></span>
+                            </label>
+
+                            <label style="margin-left: 30px; margin-right: 15px;">Aluno</label>
+                            <label class="switch">
+                            <input type="checkbox" id="loginTypePerson" name="loginTypePerson" value="aluno">
+                            <span class="slider round"></span>
+                            </label>
+
+                            <span class="invalid-feedback"><?php echo $loginTypePerson_err;?></span>
+                        </div>
+                        <input type="submit" class="btn roberto-btn btn-3 justify-content-center" value="Entrar">
+                    </form>
                 </div>
             </div>
         </div>
     </div>
     <!-- Fim Modal de Login -->
-
-    <!-- Inicio Modal de Cadastro de Instituição -->
-    <div class="modal fade" id="modalCadastroInst" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Cadastrar instituição</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body mx-3">
-                    <section class="get-in-touch">
-                        <form role="form" action="php/nuasp/instituicao/create.php" method="post">
-                            <div class="row">
-                                <div class="form-group col-12">
-                                    <input id="nomeInst" type="text" class="form-control validate" placeholder="Nome">
-                                </div>
-                                <div class="form-group col-12">
-                                    <input id="cnpjInst" type="text" class="form-control validate" placeholder="cnpj">
-                                </div>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-                                <button class="btn roberto-btn btn-3">Entrar</button>
-                            </div>
-                        </form>
-                    </section>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- Fim Modal de Cadastro de Instituição -->
-
 
     <!-- Welcome Area Start -->
     <section class="welcome-area">

@@ -73,7 +73,7 @@
 
                                 <!-- Book Now -->
                                 <div class="book-now-btn ml-3 ml-lg-5">
-                                    <a href="#">Sair</a>
+                                    <a href="#">Entrar</a>
                                 </div>
                             </div>
                             <!-- Nav End -->

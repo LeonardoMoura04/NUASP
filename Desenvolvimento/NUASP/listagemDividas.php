@@ -103,7 +103,7 @@
 
                                 <!-- Book Now -->
                                 <div class="book-now-btn ml-3 ml-lg-5">
-                                    <a data-toggle="modal" data-target="#modalLoginForm" href="#">Entrar <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                    <a href="index.php">Sair <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -185,8 +185,9 @@
                                                 echo '<a href="deleteDividas.php?id='. $row['dividaId'] .'" title="Deletar Registro" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                             echo "</td>";
                                             echo "<td>";
-                                                echo '<a href="listagemParcelas.php?id='. $row['dividaId'] .'" class="mr-3" title="Consultar Registro" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';                                            
+                                                echo '<a href="listagemParcelas.php?id='. $row['dividaId'] .'&type=f" class="mr-3" title="Consultar Registro" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';                                            
                                             echo "</td>";
+                                            
                                         echo "</tr>";
                                     }
                                     echo "</tbody>";

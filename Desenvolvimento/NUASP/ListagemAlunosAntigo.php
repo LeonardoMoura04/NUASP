@@ -77,7 +77,7 @@
 
                                 <!-- Book Now -->
                                 <div class="book-now-btn ml-3 ml-lg-5">
-                                    <a data-toggle="modal" data-target="#modalLoginForm" href="#">Entrar <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                    <a href="index.php">Sair <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -118,40 +118,6 @@
         </div>
     </div>
     <!-- Fim Modal de Login -->
-
-    <!-- Inicio Modal de Cadastro de Instituição -->
-    <div class="modal fade" id="modalCadastroInst" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Cadastrar instituição</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body mx-3">
-                    <section class="get-in-touch">
-                        <form role="form" action="php/nuasp/instituicao/create.php" method="post">
-                            <div class="row">
-                                <div class="form-group col-12">
-                                    <input id="nomeInst" type="text" class="form-control validate" placeholder="Nome">
-                                </div>
-                                <div class="form-group col-12">
-                                    <input id="cnpjInst" type="text" class="form-control validate" placeholder="cnpj">
-                                </div>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-                                <button class="btn roberto-btn btn-3">Entrar</button>
-                            </div>
-                        </form>
-                    </section>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- Fim Modal de Cadastro de Instituição -->
-
 
     <!-- Breadcrumb Area Start -->
     <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/16.jpg);">

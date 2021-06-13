@@ -5,7 +5,6 @@
     // Define variables and initialize with empty values
     $numeroParcelas = $valorTotal = $alunoId = $instituicaoId = $tipoPagamentoId = "";
     $numeroParcelas_err = $valorTotal_err = $alunoId_err = $instituicaoId_err = $tipoPagamentoId_err = "";
-    $alunosSelectId = $alunosSelectNome = $instituicoesSelectId = $instituicoesSelectNome = $tiposPagamentoSelectId = $tiposPagamentoSelectNome = array();
     
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -26,7 +25,7 @@
         }
 
         $input_alunoId = trim($_POST["alunoId"]);
-        if (empty($input_alunoId)){
+        if (empty($input_cpf)){
             $alunoId_err = "Por favor, insira o aluno.";
         }else{
             $alunoId = $input_alunoId;
@@ -48,58 +47,88 @@
 
         $anoAtual = date('Y');
         $mesAtual = date('m');
-
+        
         // Check input errors before inserting in database
         if(empty($numeroParcelas_err) && empty($valorTotal_err) && empty($alunoId_err) && empty($instituicaoId_err) && empty($tipoPagamentoId_err)){
-            $sql = "CALL CreateDivida(" . $numeroParcelas . ", " . $valorTotal . ", " . $alunoId . ", " . $instituicaoId . ", " . $tipoPagamentoId . ", " . ($valorTotal / $numeroParcelas) . ", '" . date('Y-m-d', strtotime($anoAtual . '-' . $mesAtual . '-01')) . "');";
-            if(mysqli_query($link, $sql)){
-                header("location: listagemDividas.php");
-                exit();
+            // Prepare an insert statement
+            //$sql = "INSERT INTO Divida (numeroParcelas, valorTotal, alunoId, instituicaoId, tipoPagamentoId) VALUES (?, ?, ?, ?, ?);";
+            $sql = "CALL CreateDivida(?, ?, ?, ?, ?, ?, ?);";
+
+            if($stmt = mysqli_prepare($link, $sql)){
+                // Bind variables to the prepared statement as parameters
+                mysqli_stmt_bind_param($stmt, "iiiiiis", $param_numeroParcelas, $param_valorTotal, $param_alunoId, $param_instituicaoId, $param_tipoPagamentoId, $param_valorParcela, $param_dataVencimento);
+                
+                // Set parameters
+                $param_numeroParcelas = $numeroParcelas;
+                $param_valorTotal = $valorTotal;
+                $param_alunoId = $alunoId;
+                $param_instituicaoId = $instituicaoId;
+                $param_tipoPagamentoId = $tipoPagamentoId;
+                $param_valorParcela = $valorTotal / $numeroParcelas;
+                $param_dataVencimento = date('Y-m-d', strtotime($anoAtual . '-' . $mesAtual . '-01'));
+
+                // Attempt to execute the prepared statement
+                if(mysqli_stmt_execute($stmt)){
+                    // Records created successfully. Redirect to landing page
+                    header("location: listagemDividas.php");
+                    exit();
+                } else{
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
             }
+            
+            // Close statement
+            mysqli_stmt_close($stmt);
         }
         
         // Close connection
         if (is_resource($link) && get_resource_type($link)==='mysql link'){
             mysqli_close($link);
         }
-    } else{
-        // Attempt select query execution
-        $sql = 'SELECT a.Id, a.Nome, "Aluno" tipo FROM Aluno a
-        UNION
-        SELECT i.Id, i.nome, "Instituicao" tipo FROM Instituicao i
-        UNION
-        SELECT tp.Id, tp.nome, "TipoPagamento" tipo FROM TipoPagamento tp;';
-
-        if($result = mysqli_query($link, $sql)){
-            if(mysqli_num_rows($result) > 0){
-                while($row = mysqli_fetch_array($result)){
-                    if($row["tipo"] == "Aluno"){
-                        array_push($alunosSelectId, $row["Id"]);
-                        array_push($alunosSelectNome, $row["Nome"]);
-                    }
-                    else if ($row["tipo"] == "Instituicao"){
-                        array_push($instituicoesSelectId, $row["Id"]);
-                        array_push($instituicoesSelectNome, $row["Nome"]);
-                    }
-                    else if ($row["tipo"] == "TipoPagamento"){
-                        array_push($tiposPagamentoSelectId, $row["Id"]);
-                        array_push($tiposPagamentoSelectNome, $row["Nome"]);
-                    }
-                }
-                // Free result set
-                mysqli_free_result($result);
-            } else{
-                echo '<div class="alert alert-danger"><em>Registros não encontrados.</em></div>';
-            }
-        } else{
-            echo 'Oops! Something went wrong. Please try again later.';
-        }
-
-        // Close connection
-        if (is_resource($link) && get_resource_type($link)==='mysql link'){
-            mysqli_close($link);
-        }
     }
+
+    // function criarParcelas($dividaId, $numeroParcelas, $valorTotal) {
+    //     require_once "config.php";
+    
+    //     // Define variables and initialize with empty values
+    //     $parcelaString = '';
+    //     $anoAtual = date('Y');
+    //     $mesAtual = date('m');
+    //     $dataVencimento = date('Y-m-d', strtotime($anoAtual . '-' . $mesAtual . '-01'));
+        
+    //     // Processing form data when form is submitted
+    //     if($_SERVER["REQUEST_METHOD"] == "POST"){
+    //         // Prepare an insert statement
+    //         if ($numeroParcelas > 1){
+    //             $valorParcela = $valorTotal / $numeroParcelas;
+    //             for ($i = 1; $i <= $numeroParcelas; $i++) {
+    //                 $parcelaString = $parcelaString . "(" . $dividaId . ", " . $i . ", " . date("Y-m-d", strtotime("+1 month", $dataVencimento)) . ", " . $valorParcela . ")";
+    //                 if($i != $numeroParcelas){
+    //                     $parcelaString = $parcelaString . ", "; 
+    //                 }
+    //             }
+    //         }
+    //         else if ($numeroParcelas == 1){
+    //             $parcelaString = "(" . $dividaId . ", 1, " . date("Y-m-d", strtotime("+1 month", $dataVencimento)) . ", " . $valorTotal . ")";
+    //         }
+            
+
+    //         $sql = "INSERT INTO Parcelas (dividaId, numeroParcela, dataVencimento, valorParcela) VALUES " . $parcelaString . ";";
+    //         echo $sql;
+            
+    //         // if($stmt = mysqli_prepare($link, $sql)){
+                
+    //         //     //Attempt to execute the prepared statement
+    //         //     if(mysqli_stmt_execute($stmt)){
+    //         //         // Records created successfully. Redirect to landing page.
+    //         //         header("location: listagemDividas.php");
+    //         //         exit();
+    //         //     } else{
+    //         //         echo "Oops! Something went wrong. Please try again later.";
+    //         //     }
+    //         // }
+    //     }
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -258,48 +287,96 @@
                             <span class="invalid-feedback"><?php echo $valorTotal_err;?></span>
                         </div>
 
-                        <div class='form-group'>
-                            <label>Aluno</label>
-                            <select name='alunoId' class='form-control <?php echo (!empty($alunoId_err)) ? 'is-invalid' : ''; ?>'>
-                                <?php 
-                                    for ($i = 0; $i < count($alunosSelectId); $i++) {
-                                        echo '<option value="' . htmlspecialchars($alunosSelectId[$i]) . '">' 
-                                            . htmlspecialchars($alunosSelectNome[$i]) 
-                                            . '</option>';
+                        <?php
+                        // Include config file
+                        require_once 'config.php';
+                                    
+                        // Attempt select query execution
+                        $sql = 'SELECT a.Id, a.Nome, "Aluno" tipo FROM Aluno a
+                                UNION
+                                SELECT i.Id, i.nome, "Instituicao" tipo FROM Instituicao i
+                                UNION
+                                SELECT tp.Id, tp.nome, "TipoPagamento" tipo FROM TipoPagamento tp;';
+
+                                $alunosSelectId = array();
+                                $alunosSelectNome = array();
+
+                                $instituicoesSelectId = array();
+                                $instituicoesSelectNome = array();
+
+                                $tiposPagamentoSelectId = array();
+                                $tiposPagamentoSelectNome = array();
+
+                                if($result = mysqli_query($link, $sql)){
+                                    if(mysqli_num_rows($result) > 0){
+                                        while($row = mysqli_fetch_array($result)){
+                                            if($row["tipo"] == "Aluno"){
+                                                array_push($alunosSelectId, $row["Id"]);
+                                                array_push($alunosSelectNome, $row["Nome"]);
+                                            }
+                                            else if ($row["tipo"] == "Instituicao"){
+                                                array_push($instituicoesSelectId, $row["Id"]);
+                                                array_push($instituicoesSelectNome, $row["Nome"]);
+                                            }
+                                            else if ($row["tipo"] == "TipoPagamento"){
+                                                array_push($tiposPagamentoSelectId, $row["Id"]);
+                                                array_push($tiposPagamentoSelectNome, $row["Nome"]);
+                                            }
+                                        }
+                                        // Free result set
+                                        mysqli_free_result($result);
+                                    } else{
+                                        echo '<div class="alert alert-danger"><em>Registros não encontrados.</em></div>';
                                     }
-                                ?>
-                            </select>
-                            <span class='invalid-feedback'><?php echo $alunoId_err;?></span>
-                        </div>
-                        <br><br>
-                        <div class='form-group'>
-                            <label>Instituição</label>
-                            <select name='instituicaoId' class='form-control <?php echo (!empty($instituicaoId_err)) ? 'is-invalid' : ''; ?>'>
-                                <?php 
-                                    for ($i = 0; $i < count($instituicoesSelectId); $i++) {
-                                        echo '<option value="' . htmlspecialchars($instituicoesSelectId[$i]) . '">' 
-                                            . htmlspecialchars($instituicoesSelectNome[$i]) 
-                                            . '</option>';
-                                    }
-                                ?>
-                            </select>
-                            <span class='invalid-feedback'><?php echo $instituicaoId_err;?></span>
-                        </div>
-                        <br><br>
-                        <div class='form-group'>
-                            <label>Tipo de Pagamento</label>
-                            <select name='tipoPagamentoId' class='form-control <?php echo (!empty($tipoPagamentoId_err)) ? 'is-invalid' : ''; ?>'>
-                                <?php 
-                                    for ($i = 0; $i < count($tiposPagamentoSelectId); $i++) {
-                                        echo '<option value="' . htmlspecialchars($tiposPagamentoSelectId[$i]) . '">' 
-                                            . htmlspecialchars($tiposPagamentoSelectNome[$i]) 
-                                            . '</option>';
-                                    }
-                                ?>
-                            </select>
-                            <span class='invalid-feedback'><?php echo $tipoPagamentoId_err;?></span>
-                        </div>
-                        <br><br>
+                                } else{
+                                    echo 'Oops! Something went wrong. Please try again later.';
+                                }
+            
+                                // Close connection
+                                if (is_resource($link) && get_resource_type($link)==='mysql link'){
+                                    mysqli_close($link);
+                                }
+
+                        echo "<div class='form-group'>";
+                            echo "<label>Aluno</label>";
+                            echo "<select name='alunoId' class='form-control <?php echo (!empty($alunoId_err)) ? 'is-invalid' : ''; ?>'>";
+                                for ($i = 1; $i < count($alunosSelectId); $i++) {
+                                    echo '<option value="' . htmlspecialchars($alunosSelectId[$i]) . '">' 
+                                        . htmlspecialchars($alunosSelectNome[$i]) 
+                                        . '</option>';
+                                }
+                            echo "</select>";
+                            echo "<span class='invalid-feedback'><?php echo $alunoId_err;?></span>";
+                        echo "</div>";
+                        echo "<div class='form-group'>";
+                            echo "<label>Instituição</label>";
+                            echo "<select name='instituicaoId' class='form-control <?php echo (!empty($instituicaoId_err)) ? 'is-invalid' : ''; ?>'>";
+                                for ($i = 1; $i < count($instituicoesSelectId); $i++) {
+                                    echo '<option value="' . htmlspecialchars($instituicoesSelectId[$i]) . '">' 
+                                        . htmlspecialchars($instituicoesSelectNome[$i]) 
+                                        . '</option>';
+                                }
+                            echo "</select>";
+                            echo "<span class='invalid-feedback'><?php echo $instituicaoId_err;?></span>";
+                            echo "</div>";
+                            echo "<div class='form-group'>";
+                            echo "<label>Tipo de Pagamento</label>";
+                            echo "<select name='tipoPagamentoId' class='form-control <?php echo (!empty($tipoPagamentoId_err)) ? 'is-invalid' : ''; ?>'>";
+                                for ($i = 1; $i < count($tiposPagamentoSelectId); $i++) {
+                                    echo '<option value="' . htmlspecialchars($tiposPagamentoSelectId[$i]) . '">' 
+                                        . htmlspecialchars($tiposPagamentoSelectNome[$i]) 
+                                        . '</option>';
+                                }
+                            echo "</select>";
+                            echo "<span class='invalid-feedback'><?php echo $tipoPagamentoId_err;?></span>";
+                        echo "</div>";
+
+                        ?>
+
+                        <br>
+                        <br>
+
+
                         <input type="submit" class="btn btn-primary" value="Cadastrar">
                         <a href="listagemDividas.php" class="btn btn-secondary ml-2">Cancelar</a>
                     </form>

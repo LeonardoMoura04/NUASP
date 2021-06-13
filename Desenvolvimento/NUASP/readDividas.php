@@ -218,7 +218,7 @@
                         <p><b><?php echo $alunoId; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Instituicao</label>
+                        <label>Instituição</label>
                         <p><b><?php echo $instituicaoId; ?></b></p>
                     </div>
                     <div class="form-group">

@@ -4,31 +4,16 @@
         // Include config file
         require_once "config.php";
         
-        // Prepare a delete statement
-        $sql = "DELETE FROM Parcelas WHERE dividasId = ?; DELETE FROM Divida WHERE id = ?;";
-        
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "i", $param_id);
-            
-            // Set parameters
-            $param_id = trim($_POST["id"]);
-            
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Records deleted successfully. Redirect to landing page
+        $sql = "CALL DeleteDivida(" . $_POST["id"] . ");";
+            if(mysqli_query($link, $sql)){
                 header("location: listagemDividas.php");
                 exit();
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
             }
-        }
-        
-        // Close statement
-        mysqli_stmt_close($stmt);
         
         // Close connection
-        mysqli_close($link);
+        if (is_resource($link) && get_resource_type($link)==='mysql link'){
+            mysqli_close($link);
+        }
     } else{
         // Check existence of id parameter
         if(empty(trim($_GET["id"]))){

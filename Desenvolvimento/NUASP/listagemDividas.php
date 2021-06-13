@@ -152,7 +152,8 @@
                         $sql = "SELECT d.id AS dividaId, a.nome AS alunoNome, i.nome AS instituicaoNome, tp.nome AS tipoPagamentoNome, d.* FROM Divida d
                                 INNER JOIN Aluno a ON a.id = d.alunoId
                                 INNER JOIN Instituicao i ON i.id = d.instituicaoId
-                                INNER JOIN TipoPagamento tp ON tp.id = d.tipoPagamentoId";
+                                INNER JOIN TipoPagamento tp ON tp.id = d.tipoPagamentoId
+                                ORDER BY d.Id";
                         if($result = mysqli_query($link, $sql)){
                             if(mysqli_num_rows($result) > 0){
                                 echo '<table class="table table-bordered table-striped">';
@@ -165,8 +166,8 @@
                                             echo "<th>Aluno</th>";
                                             echo "<th>Instituição</th>";
                                             echo "<th>Tipo de Pagamento</th>";
-                                            echo "<th>Ações Dívidas</th>";
-                                            echo "<th>Ações Parcelas</th>";
+                                            echo "<th>Ações - Dívidas</th>";
+                                            echo "<th>Ações - Parcelas</th>";
                                         echo "</tr>";
                                     echo "</thead>";
                                     echo "<tbody>";
@@ -181,7 +182,6 @@
                                             echo "<td>" . $row['tipoPagamentoNome'] . "</td>";
                                             echo "<td>";
                                                 echo '<a href="readDividas.php?id='. $row['dividaId'] .'" class="mr-3" title="Consultar Registro" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                                echo '<a href="updateDividas.php?id='. $row['dividaId'] .'" class="mr-3" title="Atualizar Registro" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
                                                 echo '<a href="deleteDividas.php?id='. $row['dividaId'] .'" title="Deletar Registro" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                             echo "</td>";
                                             echo "<td>";

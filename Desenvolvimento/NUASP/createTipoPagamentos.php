@@ -13,7 +13,7 @@
         $input_nome = trim($_POST["nome"]);
         if(empty($input_nome)){
             $nome_err = "Por favor, insira seu nome.";
-        } elseif(!filter_var($input_nome, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+        } elseif(!filter_var($input_nome, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[A-zÁ-ú\s]+$/")))){
             $nome_err = "Por favor, insira um nome válido.";
         } else{
             $nome = $input_nome;

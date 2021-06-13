@@ -82,14 +82,6 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul id="nav">
-                                    <li><a href="#">Administração</a>
-                                        <ul class="dropdown">
-                                            <li><a href="./listagemAlunos.php">- Alunos</a></li>
-                                            <li><a href="./listagemDividas.php">- Divídas</a></li>
-                                            <li><a href="./listagemFuncionarios.php">- Funcionários</a></li>
-                                            <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
-                                            <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
-                                        </ul>
                                     <li><a href="#">Vamos Negociar</a>
                                         <ul class="dropdown">
                                             <li><a href="https://api.whatsapp.com/send?phone=${encodeURIComponent(5519995937087)}&text=Olá, quero negociar!">- Por Whatsapp</a></li>

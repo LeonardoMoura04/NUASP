@@ -251,15 +251,7 @@
                                             <li><a href="./listagemInstituicoes.php">- Instituições</a></li>
                                             <li><a href="./listagemTipoPagamentos.php">- Tipos de Pagamento</a></li>
                                         </ul>
-                                    <li><a href="#">Vamos Negociar</a>
-                                        <ul class="dropdown">
-                                            <li><a href="https://api.whatsapp.com/send?phone=${encodeURIComponent(5519995937087)}&text=Olá, quero negociar!">- Por Whatsapp</a></li>
-                                            <li><a href="tel:551995937087">- Por Ligação</a></li>
-                                            <li><a href="./ListagemBoletos.php">- 2ª via Boleto</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="./contato.php">Contato</a></li>
-                                    <li><a href="./about.php">Sobre</a></li>
+                                    
                                 </ul>
 
                                 <!-- Book Now -->
@@ -337,6 +329,7 @@
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                         <input type="submit" class="btn btn-primary" value="Atualizar">
                         <a href="listagemFuncionarios.php" class="btn btn-secondary ml-2">Cancelar</a>
+                        <br><br>
                     </form>
                 </div>
             </div>        

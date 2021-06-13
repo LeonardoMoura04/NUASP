@@ -61,6 +61,7 @@ CREATE TABLE Parcelas (
     numeroParcela INT,
     dataVencimento DATE,
     valorParcela INT,
+    isPaga BOOLEAN DEFAULT 0,
     PRIMARY KEY (id),
     FOREIGN KEY (dividaId) REFERENCES Divida (id)
 );
@@ -120,7 +121,61 @@ SELECT * FROM Instituicao;
 SELECT * FROM Parcelas;
 SELECT * FROM TipoPagamento;
 
-DELETE FROM Aluno WHERE id = 7 OR id = 8 OR id = 9;
+
+-- PROCEDURES
+
+DELIMITER //
+
+CREATE PROCEDURE CreateDivida(
+	IN numeroParcelas INT,
+    IN valorTotal INT,
+    IN alunoId INT,
+    IN instituicaoId INT,
+    IN tipoPagamentoId INT,
+    IN valorParcela INT,
+    IN dataVencimento DATE
+)
+BEGIN
+	DECLARE dividaId INT;
+    DECLARE i INT DEFAULT 1;
+    
+    INSERT INTO Divida (numeroParcelas, valorTotal, alunoId, instituicaoId, tipoPagamentoId) VALUES (numeroParcelas, valorTotal, alunoId, instituicaoId, tipoPagamentoId);
+    SET dividaId = (SELECT id FROM Divida ORDER BY id DESC LIMIT 1);
+    
+    
+    WHILE i <= numeroParcelas DO
+        INSERT INTO Parcelas (dividaId, numeroParcela, dataVencimento, valorParcela) VALUES (dividaId, i, DATE_ADD(dataVencimento, INTERVAL +i MONTH), valorParcela);
+        SET i = i + 1;
+    END WHILE;
+END //
+
+
+DELIMITER ;
+
+DROP PROCEDURE CreateDivida;
+CALL `nuasp`.`CreateDivida`(10, 1000, 1, 1, 1, 100, '2021-06-01');
+
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteDivida(
+	IN dividaId INT
+)
+BEGIN
+    DELETE FROM Parcelas
+	WHERE dividaId = dividaId;
+    
+    DELETE FROM Divida
+	WHERE id = dividaId;
+END 
+
+//
+
+DROP PROCEDURE DeleteDivida;
+CALL `nuasp`.`DeleteDivida`(10);
+
+
+
 
 
 
@@ -155,4 +210,11 @@ SELECT i.Id, i.nome, "Instituicao" tipo FROM Instituicao i
 UNION
 SELECT tp.Id, tp.nome, "TipoPagamento" tipo FROM TipoPagamento tp;
 
-CREATE PROCEDURE CriarDivida
+DELETE FROM Aluno WHERE id = 7 OR id = 8 OR id = 9;
+
+SELECT * FROM Parcelas WHERE dividaId = 1 AND isPaga = 0 ORDER BY Id;
+UPDATE Parcelas
+SET 
+	isPaga = 1
+WHERE
+	id = 1;
